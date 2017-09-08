@@ -104,12 +104,15 @@ crossorigin=""/>
         <br>
         <label class="selectionlabel" for="dest">Extreme Heat</label>
         <br>
-        <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">High Frequency</label><br>
-        <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">High Frequency</label>
+        <!-- <button>UPLOAD</button> -->
+        <br>
         <label class="layerlabel">Medium Frequency</label><br>
-        <input id="roads3" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <!-- <button>UPLOAD</button> -->
+        <br>
         <label class="layerlabel">Low Frequency</label><br>
+        <br>
+        <!-- <button>UPLOAD</button> -->
         <br>
 
         <label class="selectionlabel" for="dest">Vegetation</label>
@@ -229,16 +232,27 @@ crossorigin=""/>
   </div>
 
   <div class="description">
-    <div class="chartsarea">
-      <canvas class="charts" id="myChart1"></canvas>
-      <br>
-      <canvas class="charts" id="myChart2"></canvas>
+    <!-- <div desarea> -->
+      <p id = "destext1">
+        <strong>Brief Description</strong>
+        <br><br>
+        This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. Some have begun to take steps to adapt to threats intensified by climate change, such as flooding, bushfires, heatwaves, and rising sea levels. Projects include: By installing protective and/ or resilient technologies and materials in properties that are prone to flooding.
+      </p>
+    <!-- </div> -->
+
+    <div class = "surveyarea">
+      <p id = "destext2">
+        <strong>Survey Section</strong>
+        <br><br>
+        Here is the area for your inputs on comparative adaptation strategy.
+      </p>
+      <ul id = "destext3">
+        <p>1. Are you worried about the sea level rise in 10 years?<br><br>
+        2. Are you satisfied with your home area now?<br><br>
+        3. How is the Urban Heat Island Effect impact you?
+        </p>
+      </ul>
     </div>
-    <p id = "destext">
-      <strong>Brief Description</strong>
-      <br><br>
-      This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. Some have begun to take steps to adapt to threats intensified by climate change, such as flooding, bushfires, heatwaves, and rising sea levels. Projects include: By installing protective and/ or resilient technologies and materials in properties that are prone to flooding.
-    </p>
     <div class = "buttonarea">
       <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
         Download PDF
