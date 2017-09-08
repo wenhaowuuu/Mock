@@ -74,18 +74,18 @@ crossorigin=""/>
     </h2>
     <br>
     <br>
-    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">Look for a Municipality</label>
+    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">SCALE</label>
     <br>
     <div class="search" style="display:inline-block;position:relative;left:10px;">
       <div style="display:inline-block;">
         <div class="option" class="leaflet-bar">
           <select name="basemaps" id="location1" onChange="changeBasemap1(this)">
-            <option class = "option" value="">Country</option>
-            <option class = "option" value="Guatemala">Italy</option>
-            <option class = "option" value="Honduras">France</option>
-            <option class = "option" value="El Salvador">Switzerland</option>
+            <option class = "option" value="Guatemala">Regional</option>
+            <option class = "option" value="Guatemala">City</option>
+            <option class = "option" value="Honduras">District</option>
+            <option class = "option" value="El Salvador">Neighborhood</option>
           </select>
-          <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
+          <!-- <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
             <option class = "option" value="">Department</option>
             <option class = "option" value="Peten">Peten</option>
             <option class = "option" value="Guatemala">Guatemala</option>
@@ -96,42 +96,52 @@ crossorigin=""/>
             <option class = "option" value="La Libertad">La Libertad</option>
             <option class = "option" value="Guatemala">Guatemala</option>
             <option class = "option" value="Coban">Coban</option>
-          </select>
+          </select> -->
         </div>
         <br>
-        <label class="selectionlabel" for="dest">KEY INDICATORS</label>
+
+        <label class="selectionlabel" for="dest">DATA UPLOAD</label>
         <br>
-        <label class="selectionlabel" for="dest">Transportation</label>
+        <label class="selectionlabel" for="dest">Extreme Heat</label>
         <br>
         <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Primary Roads</label><br>
+        <label class="layerlabel">High Frequency</label><br>
         <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Secondary Roads</label><br>
+        <label class="layerlabel">Medium Frequency</label><br>
         <input id="roads3" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Tertiary Roads</label><br>
-        <input id="roads4" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Urban Roads</label><br>
-        <input id="roads5" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Rural Roads</label><br>
+        <label class="layerlabel">Low Frequency</label><br>
         <br>
 
-
-        <label class="selectionlabel" for="dest">Public Health</label>
+        <label class="selectionlabel" for="dest">Vegetation</label>
         <br>
         <input id="clinic" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Clinics</label><br>
+        <label class="layerlabel">Forest</label><br>
         <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Hospitals</label><br>
+        <label class="layerlabel">Pastures</label><br>
+        <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Grassland</label><br>
         <br>
 
-
-        <label class="selectionlabel" for="dest">Utilities</label>
+        <label class="selectionlabel" for="dest">Water Availability</label>
         <br>
         <input id="electricity" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Electricity</label><br>
+        <label class="layerlabel">Rain</label><br>
         <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Water Pipelines</label><br>
+        <label class="layerlabel">River</label><br>
+        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Groundwater</label><br>
         <br>
+
+        <label class="selectionlabel" for="dest">Energy Use</label>
+        <br>
+        <input id="electricity" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">High Comsuption</label><br>
+        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Medium Consumption</label><br>
+        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Low Consumption</label><br>
+        <br>
+
 
      </div>
      <div style="display:inline-block; position:relative; over-flow:auto; bottom: -5px; left:-6px; z-index:50;">
