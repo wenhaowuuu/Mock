@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" href="dist/leaflet.print.css"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<link rel="stylesheet" href="css/reset.css">
+<link rel="stylesheet" href="css/bootstrap.css"/>
+<link rel="stylesheet" href="css/style0.css">
+
+<link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300i" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"
+integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZSC5lUXdVyo/7yfsqFjQ4S+aKw=="
+crossorigin=""/>
+
+<!-- <table id ="testTable" summary="Infrastructure Efficiency Profile." rules="groups" frame="hsides" border="2">
+  <caption>MOCKUP <p style="background-color: #f07f30; color: #ffffff; font-weight: bold;" id="exceltitle"></p></caption>
+  <caption>DataXLat @ GeoAdaptive LLC</caption>
+  <thead valign="top">
+    <tr>
+      <th>ID</th>
+      <th>Country</th>
+      <th>Provinces</th>
+      <th>Cities</th>
+      <th class = "X_colhead" border="1">Social-Economy<br>Poverty Rate: % of population living in poverty</th>
+      <th class = "X_colhead" border="1">Transportation<br>Total Length of Roads (km)</th>
+      <th class = "X_colhead" border="1">Transportation<br>Road Density (area/roads km)</th>
+      <th class = "X_colhead" border="1">Transportation<br>Typology split: Rural / Urban</th>
+      <th class = "X_colhead" border="1">Transportation<br>Typology split: km x mayor, secondary, tertiary</th>
+      <th class = "X_colhead" border="1">Transportation<br>Road efficiency (% population within 30 minutes of road)</th>
+      <th class = "X_colhead" border="1">Utility<br>Sanitation: % of coverage</th>
+      <th class = "X_colhead" border="1">Utility<br>Electricity: % of coverage</th>
+      <th class = "X_colhead" border="1">Utility<br>Water: % of coverage</th>
+      <th class = "X_colhead" border="1">Utility<br>Basic Needs Unsatisfied:</th>
+      <th class = "X_colhead" border="1">Other<br>Notes:</th>
+    </tr>
+  </thead>
+       <tbody>
+         <tr>
+           <td id = "X_ID">0001</td>
+           <td id = "X_country">Honduras</td>
+           <td id = "X_department">Peten</td>
+           <td id = "X_municipality">Quito</td>
+           <td id = "X_PovertyRate">12%</td>
+           <td id = "X_rdlength">3671</td>
+           <td id = "X_rddensity">200</td>
+           <td id = "X_typologysplit1">6:4</td>
+           <td id = "X_typologysplit2">1:3:6</td>
+           <td id = "X_rdefficiency">35</td>
+           <td id = "X_sanitation">73</td>
+           <td id = "X_Electricity">85</td>
+           <td id = "X_Water">90</td>
+           <td id = "X_BasicNeeds">24</td>
+           <td id = "X_Notes">something to consider</td>
+         </tr>
+  </table> -->
+
+  <!-- //PDF BASIC FRAMEWORK -->
+  <!-- <div id = "testPDF">
+    <h1 id = "PDFheading">The PDF Heading </h1>
+      <h2 class = "title">The Title </h2>
+        <h3 class = "subtitle"> The Subtitle </h3>
+          <p class = "text">the description </p>
+        <h3 class = "subtitle"> The Subtitle </h3>
+          <p class = "text">the description </p>
+  </div> -->
+
+<body>
+<!--Left Panel-->
+<div class = "header">
+</div>
+<div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 380px; top: 18px; data-bottom="false" z-index:50;">
+    <h2 class = "main-heading">Urban Heat Island Analyst
+      <br>
+    </h2>
+    <br>
+    <br>
+    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">Look for a Municipality</label>
+    <br>
+    <div class="search" style="display:inline-block;position:relative;left:10px;">
+      <div style="display:inline-block;">
+        <div class="option" class="leaflet-bar">
+          <select name="basemaps" id="location1" onChange="changeBasemap1(this)">
+            <option class = "option" value="">Country</option>
+            <option class = "option" value="Guatemala">Italy</option>
+            <option class = "option" value="Honduras">France</option>
+            <option class = "option" value="El Salvador">Switzerland</option>
+          </select>
+          <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
+            <option class = "option" value="">Department</option>
+            <option class = "option" value="Peten">Peten</option>
+            <option class = "option" value="Guatemala">Guatemala</option>
+            <option class = "option" value="Alta Verapaz">Alta Verapaz</option>
+          </select>
+          <select name="basemaps" id="location3" onChange="changeBasemap3(this)">
+            <option class = "option" value="">Municipality</option>
+            <option class = "option" value="La Libertad">La Libertad</option>
+            <option class = "option" value="Guatemala">Guatemala</option>
+            <option class = "option" value="Coban">Coban</option>
+          </select>
+        </div>
+        <br>
+        <label class="selectionlabel" for="dest">KEY INDICATORS</label>
+        <br>
+        <label class="selectionlabel" for="dest">Transportation</label>
+        <br>
+        <input id="roads1" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Primary Roads</label><br>
+        <input id="roads2" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Secondary Roads</label><br>
+        <input id="roads3" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Tertiary Roads</label><br>
+        <input id="roads4" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Urban Roads</label><br>
+        <input id="roads5" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Rural Roads</label><br>
+        <br>
+
+
+        <label class="selectionlabel" for="dest">Public Health</label>
+        <br>
+        <input id="clinic" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Clinics</label><br>
+        <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Hospitals</label><br>
+        <br>
+
+
+        <label class="selectionlabel" for="dest">Utilities</label>
+        <br>
+        <input id="electricity" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Electricity</label><br>
+        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Water Pipelines</label><br>
+        <br>
+
+     </div>
+     <div style="display:inline-block; position:relative; over-flow:auto; bottom: -5px; left:-6px; z-index:50;">
+       <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
+         Show the Map
+       </button>
+       <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
+         Clear Selection
+       </button>
+       <br>
+     </div>
+    </div>
+
+
+    <div style="position:absolute; over-flow:auto; left:5px;width:380px;top:510px;">
+      <div id="results" style="display: none;">
+        <h5 id = "selection"></h5>
+        <h2 id = "sidebar-heading"><span id="LENGTH">City Name</span></h2>
+        <p class="annotation">
+          <span class="glyphicon glyphicon glyphicon-star"></span>
+          Road Indicators:
+          The Municipality of <span id="LENGTH"><strong>City Name </strong></span> is located in the
+          <span id="POP"><strong> department name </strong></span> department.
+          <br>
+          <br>
+          <span class="glyphicon glyphicon glyphicon-star"></span>
+          Population Indicators:
+          <span id="30PCT"><strong>gen_pov</strong></span> % of its population live in poverty.
+          <br>
+          <br>
+          <span class="glyphicon glyphicon glyphicon-star"></span>
+          Access to Institutions:
+          Its dataset's ID is <span id="60PCT"><strong>ID</strong></span> and the data was collected in year
+          <span id="90PCT"><strong></strong></span>.
+        </p>
+
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+   <div style = "position:absolute;left:5px;width:390px;top:515px;margin:10px;">
+      <!-- top:780px for the desktop -->
+        <img id = "logo" src="https://preview.ibb.co/i2z8FQ/logo.png">
+        <p class = storylink> About the DATA SOURCE &nbsp;
+           <a href="http://geoadaptive.com/home/practices/dataxlat/"target="_blank">
+             <span class="glyphicon glyphicon-hand-right" aria-hidden="true"></span>
+           </a>
+        </p>
+        <!-- <p> There are over 10 cities in China with population over 10,000,000 in 2017. -->
+    </div>
+</div>
+<!-- <div id="map" style="position: absolute; right:330px; left: 380px; top:20px; height:98%; z-index:10;"></div> -->
+<div id="map" style="position: absolute; right:0px; left: 380px; top:20px; height:68%; z-index:70;"></div>
+  <div class="dropdown1">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Change Scale
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <!-- <li id = "global"><a href="#">Global</a></li> -->
+        <li class = "option" id = "Global"><a href="#">Global</a></li>
+        <li class = "option" id = "Regional"><a href="#">Regional</a></li>
+        <li class = "option" id = "AOI"><a href="#">AOI</a></li>
+    </ul>
+  </div>
+  <div class="hint">
+    <p> Hint*: Click the boundaries to read statistics.</p>
+  </div>
+    <br>
+    <br>
+  <div class="dropdown2">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        BaseMaps
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+          <li id = "dark"><a class = "option" href="#">Dark</a></li>
+          <li id = "light"><a class = "option" href="#">Light</a></li>
+          <li id = "satellite"><a class = "option" href="#">Satellite</a></li>
+      </ul>
+  </div>
+
+  <div class="description">
+    <div class="chartsarea">
+      <canvas class="charts" id="myChart1"></canvas>
+      <br>
+      <canvas class="charts" id="myChart2"></canvas>
+    </div>
+    <p id = "destext">
+      <strong>Brief Description</strong>
+      <br><br>
+      This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. Some have begun to take steps to adapt to threats intensified by climate change, such as flooding, bushfires, heatwaves, and rising sea levels. Projects include: By installing protective and/ or resilient technologies and materials in properties that are prone to flooding.
+    </p>
+    <div class = "buttonarea">
+      <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+        Download PDF
+      </button>
+      <button class="btn btn-default dropdown-toggle" type="button" id="download2" onclick="tableToExcel('testTable', 'Infrastructure Efficiency Profile')" data-toggle="dropdown" aria-haspopup="true">
+        Download EXCEL
+      </button>
+      <br>
+    </div>
+  </div>
+
+  <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
+  <!-- //OPTIONAL LEGEND OBJECT -->
+  <!-- <div class="legend">
+      <h5>Poverty Rates of Municipalities</h5>
+      <div>
+        <div class = label1 id = fill1></div><p class = label1> < 10%</p>
+      </div>
+      <div>
+        <div class = label1 id = fill2></div><p class = label1>10% - 30%</p>
+      </div>
+      <div>
+        <div class = label1 id = fill3></div><p class = label1>30% - 50%</p>
+      </div>
+      <div>
+        <div class = label1 id = fill4></div><p class = label1>50% - 75%</p>
+      </div>
+      <div>
+        <div class = label1 id = fill5></div><p class = label1> > 75%</p>
+      </div>
+  </div> -->
+
+  <div class = "locationmap">
+    <canvas class="charts" id="myImage1"></canvas>
+  </div>
+
+  <!-- <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150"
+     id="myImg"
+     alt="Image"
+     width="650"
+     height="150"
+     z-index="90"> -->
+
+
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+  <!-- <div id="mapimage">
+    <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" display:none
+      id="myImg"
+      alt="Image"
+      width="180"
+      height="120">
+  </div> -->
+
+  <!-- A click on  -->
+  <!-- Javascript Imports -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <!-- <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.1.0/dist/leaflet-src.js"
+  integrity="sha384-TWB9xRHTlLQmqAngHwD7usGcf4akGf0JP6aHwlgilpmOu2UuBq5aWLsDAh39iSn1"
+  crossorigin=""></script>
+  <script
+      src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <!-- <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script> -->
+  <script src='https://npmcdn.com/@turf/turf/turf.min.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.2/jspdf.plugin.autotable.js"></script>
+
+
+
+  <script>
+    // var bbox = turf.bbox(features);
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js"></script>
+  <!-- <script src="js/MidTerm-setup.js"></script> -->
+  <!-- <script src="bootstrap.js"></script> -->
+
+
+  <!-- <script src="https://www.jqueryscript.net/demo/jQuery-Plugin-To-Print-Any-Part-Of-Your-Page-Print/jQuery.print.js"></script> -->
+  <script src="js/js01.js"></script>
+  <!-- Copyright (c) 2010-2016 James Hall, https://github.com/MrRio/jsPDF -->
+
+</body>
+</html>
