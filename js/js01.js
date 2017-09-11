@@ -280,17 +280,29 @@ $('#satellite').click(function(){
 
 
 // 1.3 SWITCHING SACLES
-    $('#Global').click(function(){
-      map.setView([15.162820, -87.509107],2);
+    // $('#regional').click(function(){
+    //   map.setView([44.410606, 8.934083],6.5);
+    // });
+    //
+    // $('#city').click(function(){
+    //   map.setView([44.410606, 8.934083],9);
+    // });
+    //
+    // $('#district').click(function(){
+    //   map.setView([44.410606, 8.934083],10.5);
+    // });
+    //
+    // $('#neighborhood').click(function(){
+    //   map.setView([44.410606, 8.934083],12);
+    // });
+
+
+
+    var map = L.map('map', {
+      center: [44.410606, 8.934083],
+      zoom: 9
     });
 
-    $('#Regional').click(function(){
-      map.setView([15.162820, -87.509107],5);
-    });
-
-    $('#AOI').click(function(){
-      map.setView([15.162820, -87.69107],6.5);
-    });
 
 
 // 2. CREATE VARIABLES
@@ -492,14 +504,17 @@ var P_rd_31 = ' ';
 var changeBasemap1 = function(location1){
   var value1 = location1.value;
   console.log(value1);
-  if(value1 == 'Guatemala'){
+  if(value1 == 'regional'){
       map.setView([15.372844, -90.544976],8);
   }
-  if(value1 == 'Honduras'){
+  if(value1 == 'city'){
       map.setView([14.811574, -86.953985],8);
   }
-  if(value1 == 'El Salvador'){
+  if(value1 == 'district'){
       map.setView([13.650275, -88.850540],8);
+  }
+  if(value1 == 'neighborhood'){
+      map.setView([13.650275, -88.850540],9);
   }
 };
 
