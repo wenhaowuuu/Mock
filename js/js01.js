@@ -1,9 +1,4 @@
-//AS OF JULY 20TH, THE UPDATE HERE
-//LOAD THE INTRO PAGE
-//THIS IS USEFUL BUT MAYBE NOT THE BEST
-
-
-
+//AS OF SEPTEMBER 12TH, THE UPDATE HERE
 // THE RUNNING NUMBERS ANIMATION
 $('.count').each(function () {
     $(this).prop('Counter',0).animate({
@@ -16,8 +11,6 @@ $('.count').each(function () {
         }
     });
 });
-
-
 
 // THE FADE-OUT EFFECT 001
 //https://www.webdesignerdepot.com/2014/05/how-to-create-a-scrollable-splash-screen-with-css3-and-jquery/
@@ -43,10 +36,6 @@ $('.enter1').click(function () {
 
 
 
-//THE FADING EFFECT 2
-
-
-
 //ADD A TIMER
 function startTime() {
     var today = new Date();
@@ -66,9 +55,6 @@ function checkTime(i) {
     return i;
 }
 
-
-
-
 //the migration is complete.
 // TARGET: TO LEARN THE OSMNX TOOLBOX
 // AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
@@ -84,7 +70,7 @@ function checkTime(i) {
 //SOME NOTES HERE
 var map = L.map('map', {
   center: [44.410606, 8.934083],
-  zoom: 9
+  zoom: 5
 });
 
 // var Style = 'dark';
@@ -102,14 +88,6 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 //       iconSize:[15,24],
 //       iconAnchor:[8,10],
 //     });
-//
-// var schoolicon = L.icon({
-//       iconUrl:'marker-icon.png',
-//       iconSize:[8,10],
-//       iconAnchor:[5,7],
-//     });
-
-
 
 //TESTING SOME TURF FUNCTIONALITY
 //0720: SOMETHING IS WRONG WITH THE TURF FUCNTION
@@ -118,8 +96,6 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 // var features;
 
 // var bbox = turf.bbox(features);
-
-
 // $ npm install @turf/intersect
 // $ npm test
 
@@ -143,7 +119,6 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 // };
 // var units = "miles";
 // var distance = distance(from, to, units);
-
 
 
 //EXAMPLE WITH INTERSECT
@@ -191,17 +166,6 @@ $('#dark').click(function(){
   }).addTo(map);
 });
 
-$('#light').click(function(){
-    $('#map0').hide();
-    $('#map').show();
-    Style = 'light';
-    L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
-      maxZoom: 18,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
-      subdomains: 'abcd'
-    }).addTo(map);
-});
-
 //1.3 LOAD SATELLITE MAP
 $('#satellite').click(function(){
   $('#map').hide();
@@ -221,7 +185,6 @@ $('#satellite').click(function(){
   ).done(function(data){
           // console.log("downloadxxx");
           map0.on('load', function () {
-
             //REFERENCE ON LOADING ELEMENTS ON MAPBOX'S MAP
             // https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5
             // http://lyzidiamond.com/posts/external-geojson-mapbox
@@ -278,8 +241,7 @@ $('#satellite').click(function(){
       });
   });
 
-
-// 1.3 SWITCHING SACLES
+// 1.3 SWITCHING SCALES
     // $('#regional').click(function(){
     //   map.setView([44.410606, 8.934083],6.5);
     // });
@@ -296,17 +258,11 @@ $('#satellite').click(function(){
     //   map.setView([44.410606, 8.934083],12);
     // });
 
-
-
-    var map = L.map('map', {
-      center: [44.410606, 8.934083],
-      zoom: 9
-    });
-
-
-
 // 2. CREATE VARIABLES
 // 2.1 DATA SOURCE URLS
+  //THE ITALIAN ADMINISTRATIVE BOUNDARY
+  var adm = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/ita_adm1_1.geojson";
+
   //THE CLEANED DATASET
   var muni_clean = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/nt_muni_joined_clean.geojson";
 
@@ -327,7 +283,6 @@ $('#satellite').click(function(){
   //UTILITIES
   // Y1, Y2
 
-
   //PUBLIC HEALTH
   // M1, M2
   var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_muni_joined_clean.geojson";
@@ -337,14 +292,7 @@ $('#satellite').click(function(){
   // W1, W2, W3
   var school = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_muni_joined_clean.geojson";
 
-
 // 2.2 VARIABLES
-//   var SalVardoB;
-//   var HondurasB;
-//   var GuatemalaB;
-//   var NationsB = [ ];
-//   var DepartmentsB = [ ];
-
   var PrimaryRoads = [ ];
   var SecondaryRoads = [ ];
   var TertiaryRoads = [ ];
@@ -378,9 +326,6 @@ $('#satellite').click(function(){
   var layerMappedPolygons;
   var selectedmuni_name = '';
   var selectedlayer;
-
-
-
   var mapURL;
   var img;
 
@@ -388,8 +333,6 @@ $('#satellite').click(function(){
   var RD_1ST;
   var RD_2ND;
   var RD_3RD;
-
-
 
   //1. TOTAL LENGTH
   var RD_LENGTH;
@@ -452,88 +395,63 @@ var P_rd_3 = ' ';
 var P_rd_21 = ' ';
 var P_rd_31 = ' ';
 
+//LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
+$(document).ready(function(){
+  $.ajax(adm).done(function(data) {
+    parsedData000 = JSON.parse(data);
+    console.log(parsedData000);
+    console.log("parsed000");
+    layerMappedPolygons = L.geoJson(parsedData000,
+      {
+        style: {opacity:0.4,width:0.5,color:'#E0903F'},
+        pointToLayer: function (feature, latlng) {
+          return new L.Polygon(latlng, {
+          });
+        },
 
-//PRELOAD THE FUNCTIONS
-  $(document).ready(function(){
-    $.ajax(muni_clean).done(function(data) {
-      parsedData00 = JSON.parse(data);
-      console.log(parsedData00);
-      console.log("parsed00");
-      layerMappedPolygons = L.geoJson(parsedData00,
-        {
-          style: {opacity:0.4,width:0.5,color:'#E0903F'},
-          pointToLayer: function (feature, latlng) {
-            return new L.Polygon(latlng, {
-            });
-          },
+        onEachFeature: function(feature,layer){
 
-          onEachFeature: function(feature,layer){
+          layer.bindPopup(
+            "<b>Region Name: </b>" +
+            feature.properties.name_1 +
+            "</br>" +
 
-            layer.bindPopup(
-              "<b>Municipality Name: </b>" +
-              feature.properties.m_name +
-              "</br>" +
+            "<b>Total Area: </b>" + "10,795 " + "sq km" +
+            "</br>" +
 
-              "<b>Department Name: </b>" +
-              feature.properties.d_name +
-              "</br>" +
+            "<b>Total Population: </b>" + "570,000" +
+            "</br>" +
 
-              "<b>Total Road Length: </b>" +
-              feature.properties.rd_length.toFixed(3) + " km" +
-              "</br>" +
+            "</br>" +
+            "<b>Data Collected Year: </b>" + "2014"
+          )
 
-              "<b>Road Density: </b>" +
-              feature.properties.rd_density.toFixed(3) + " per square km" +
-              "</br>" +
+         }
+        }).addTo(map);
+        layerMappedPolygons.eachLayer(eachFeatureFunction);
+        // console.log(layerMappedPolygons[0].id_1);
+      })
+    });
 
-              "</br>" +
-              "<b>Data Collected Year: </b>" +
-              feature.properties.year
-            )
-
-           }
-          }).addTo(map);
-          layerMappedPolygons.eachLayer(eachFeatureFunction);
-          // console.log(layerMappedPolygons[0].id);
-        })
-      });
 
 //ZOOM TO SELECTED LOCATIONS
 //ANOTHER METHOD HERE: http://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
-
 var changeBasemap1 = function(location1){
   var value1 = location1.value;
   console.log(value1);
   if(value1 == 'regional'){
-      map.setView([15.372844, -90.544976],8);
+      map.setView([44.410606, 8.934083],5);
   }
   if(value1 == 'city'){
-      map.setView([14.811574, -86.953985],8);
+      map.setView([44.410606, 8.934083],9);
   }
   if(value1 == 'district'){
-      map.setView([13.650275, -88.850540],8);
+      map.setView([44.410606, 8.934083],11);
   }
   if(value1 == 'neighborhood'){
-      map.setView([13.650275, -88.850540],9);
+      map.setView([44.410606, 8.934083],14);
   }
 };
-
-
-
-var changeBasemap2 = function(location2){
-  var value2 = location2.value;
-  console.log(value2);
-  if(value2 == 'Peten'){
-      map.setView([16.936401, -90.036336],9);
-  }
-  if(value2 == 'Guatemala'){
-      map.setView([14.643792, -90.467986],9);
-  }
-  if(value2 == 'Alta Verapaz'){
-      map.setView([15.649419, -90.143057],9);
-  }
-};
-
 
 
 var changeBasemap3 = function(location3){
@@ -579,7 +497,6 @@ var changeBasemap3 = function(location3){
       });
   }
 };
-
 
 //3. FUNCTIONS
 // 3.1 WHEN THE LAYER IS CLICKED:
@@ -713,8 +630,6 @@ var changeBasemap3 = function(location3){
          $('.chartsarea').append('<canvas class="charts" id="myChart2"></canvas>');
          console.log("replace2");
 
-
-
          //Click odd number of times - loading the shape, while
          //click even number of times - removing it.
         //  if (numberofClicks % 2 == 0){
@@ -801,8 +716,6 @@ var changeBasemap3 = function(location3){
 
           }
 
-
-
           // just like the charts going on the sidebar
           //
           // $('#myImage1').append(img);
@@ -814,14 +727,6 @@ var changeBasemap3 = function(location3){
           // $('.locationmap').append('<canvas class="charts" id="myImage1"></canvas>');
           // $('.locationmap').append('<canvas class="charts" id="myImage1"></canvas>');
           console.log("replace3");
-
-
-
-
-
-
-
-
 
            //  $('#exceltitle').text(layer.feature.properties.m_name);
            //ZOOM TO THE SELECTED MUNICIPALITY
@@ -844,10 +749,8 @@ var changeBasemap3 = function(location3){
          $('#selection').append(blank + blank + blank + list + " ");
 
          // $('#selection').text(namelist);
-
          // <div id="results" style="display: none;">
         //  document.getElementById("results").style.display = "inline";
-
 
           //  $('#LENGTH').text(layer.feature.properties.m_name);
           //  $('#POP').text(layer.feature.properties.d_name);
@@ -858,12 +761,8 @@ var changeBasemap3 = function(location3){
 
 
           //HIGHLIGHT THE MAP CLICKED
-
           layerMappedPolygons.setStyle(fadeout);
-
-
           layer.setStyle(highlight);
-
 
           $('#hidemap').click(function(){
             layer.setStyle(samelook);
@@ -938,19 +837,7 @@ var changeBasemap3 = function(location3){
          //     }
          //    }
          //  );
-
-
        // };
-
-
-
-         //LAYER CLICK EVENT
-         // if (currentlayer!=null){
-         //   if(currentlayer.feature.properties.m_name == itemB.feature.properties.m_name)
-         //
-         // }
-
-
 
 
           //LINK DATA WITH THE GRAPH
@@ -965,7 +852,6 @@ var changeBasemap3 = function(location3){
            //STUDY THIS EXAMPLE!!!
           //  https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
           //  https://jsfiddle.net/a9hmnd9L/2/
-
 
             // var canvas = $('#myChart1').get(0);
             // var myChart = new Chart(canvas, {
@@ -989,7 +875,6 @@ var changeBasemap3 = function(location3){
             //   });
             // });
 
-
           if(myChart!=null){
            //  myChart.destroy();
            //  $('#myChart2').remove();
@@ -998,15 +883,8 @@ var changeBasemap3 = function(location3){
           }
           else {
 
-
-
-
-
-
-
             var ctx2 = document.getElementById("myChart2");
-
-            ctx2.style.backgroundColor = 'rgba(255,255,255,1)';
+            // ctx2.style.backgroundColor = 'rgba(255,255,255,1)';
             //Fill the background
            //  Chart.plugins.register({
            //    beforeDraw: function(myChart) {
@@ -1122,45 +1000,6 @@ var changeBasemap3 = function(location3){
                 });
               }
 
-              //LOAD THE STACKED BAR CHART -- needs some work!!
-           //      var chart = new CanvasJS.Chart("chartContainer",
-           //      {
-           //        title:{
-           //          text: "Road Breakdown"
-           //        },
-            //
-           //        data: [
-           //          {
-           //            type: "stackedBar",
-           //            dataPoints: [
-           //              { x: new Date(2012, 01, 1), y: P_rd_1 },
-           //              { x: new Date(2012, 02, 1), y: 6407.589269},
-           //            ]
-           //    },
-           //      {
-           //      type: "stackedBar",
-           //       dataPoints: [
-           //      { x: new Date(2012, 01, 1), y: P_rd_2 },
-           //      { x: new Date(2012, 02, 1), y: 21603.01897},
-           //      ]
-           //    },
-           //      {
-           //      type: "stackedBar",
-           //       dataPoints: [
-           //      { x: new Date(2012, 01, 1), y: P_rd_3 },
-           //      { x: new Date(2012, 02, 1), y: 18764.70811},
-           //      ]
-           //    },
-            //
-           //    ]
-           //  });
-           //  chart.render();
-
-       //  };
-
-       // this below is the else } !!!
-          // }
-
        }
    )};
 
@@ -1241,48 +1080,6 @@ var myFilter = function(feature) {
 // 4. LOADING REAL DATA
 //4.0 LOADING THREE NATIONS BOUNDARY
 // $(document).ready(function(){
-//   $.ajax(Guatemala).done(function(data) {
-//     parsedData_Guatemala = JSON.parse(data);
-//     console.log("parsed_Guatemala");
-//     console.log(parsedData_Guatemala.features[0].properties.country);
-//   //   layerMappedPolygons = _.each(parsedData_Guatemala,function(item){
-//   //     L.geoJson(parsedData_Guatemala,
-//   //       {
-//   //         style: {opacity:0.4},
-//   //         pointToLayer: function (feature, latlngs) {
-//   //           return new L.Polygon(latlngs, {
-//   //           }
-//   //         );
-//   //       }}
-//   //     ).addTo(map).bindPopup("text");
-//   //   }
-//   // );
-//   });
-// });
-
-
-// $(document).ready(function(){
-//   $.ajax(Salvador).done(function(data) {
-//     parsedData_Salvador = JSON.parse(data);
-//     console.log("parsed_Salvador");
-//     console.log(parsedData_Salvador.features[0].properties.country);
-//   //   layerMappedPolygons = _.each(parsedData_Salvador,function(item){
-//   //     L.geoJson(parsedData_Salvador,
-//   //       {
-//   //         style: {opacity:0.4},
-//   //         pointToLayer: function (feature, latlngs) {
-//   //           return new L.Polygon(latlngs, {
-//   //           }
-//   //         );
-//   //       }}
-//   //     ).addTo(map).bindPopup("text");
-//   //   }
-//   // );
-//   });
-// });
-
-
-// $(document).ready(function(){
 //   $.ajax(Honduras).done(function(data) {
 //     parsedData_Honduras = JSON.parse(data);
 //     console.log("parsed23");
@@ -1302,8 +1099,6 @@ var myFilter = function(feature) {
 //   });
 // });
 
-
-
 // 4.1 LOADING SOUTH AMERICA DATA
 //SELECT THE LAYERS YOU WANT
 
@@ -1311,7 +1106,6 @@ var myFilter = function(feature) {
 //ADD THE LAYERS TO THE MAP
 var selectedmaps = [];
 var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
-
 
 // $('#nation').change(function(){
 //   if(this.checked){
@@ -1343,7 +1137,6 @@ var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
 //     y2 = false;
 //   }
 // });
-
 
 
 // TRANSPORTATION
@@ -1391,7 +1184,6 @@ $('#roads5').change(function(){
     x5 = false;
   }
 });
-
 
 //UTILITIES CONTROLLER
 $('#electricity').change(function(){
@@ -1469,8 +1261,6 @@ $('#highschool').change(function(){
     w3 = false;
   }
 });
-
-
 
 // SHOW THE MAPS OR HIDE THEM
 $('#showmap').click(function(){
@@ -1612,7 +1402,6 @@ $('#showmap').click(function(){
         selectedmaps.push(RuralRoads);
     }
 
-
 //UTILITIES
 if (y1 == true){
     //LOAD THE ELECTRICITY NETWORKS
@@ -1632,7 +1421,6 @@ if (y1 == true){
     selectedmaps.push(Electricity);
 }
 
-
 if (y2 == true){
     //LOAD THE ELECTRICITY NETWORKS
     _.each(parsedData_water,function(item){
@@ -1650,7 +1438,6 @@ if (y2 == true){
     );
     selectedmaps.push(Water);
 }
-
 
     // if (x3 == true){
     //   //LOAD THE TERTIARY DATA
@@ -1675,8 +1462,6 @@ if (y2 == true){
     //       selectedmaps.push(Hospitals);
     //   }
 
-
-
     if (m1 === true){
       //LOAD THE HOSPITALS DATA
          _.each(parsedData_Hospital,function(item){
@@ -1699,7 +1484,6 @@ if (y2 == true){
           );
           selectedmaps.push(Hospitals);
       }
-
 
       // LOAD CLINICS DATA
       if (m2 === true){
@@ -1724,8 +1508,6 @@ if (y2 == true){
             );
             selectedmaps.push(Clinics);
         }
-
-
 
 //LOAD SCHOOL DATA IN DIFFERENT KINDS
       if (w1 == true){
@@ -1767,8 +1549,6 @@ if (y2 == true){
          selectedmaps.push(PrimarySchools);
       }
 
-
-
       if (w2 == true){
         //LOAD THE SCHOOL DATA
         var myFilter2 = function(feature) {
@@ -1783,7 +1563,6 @@ if (y2 == true){
               return false;
             }
           };
-
 
         _.each(parsedData_Schools,function(item){
            var itemB = L.geoJson(parsedData_Schools,
@@ -1807,9 +1586,6 @@ if (y2 == true){
          );
          selectedmaps.push(MiddleSchools);
       }
-
-
-
 
       if (w3 == true){
         var myFilter3 = function(feature) {
@@ -1934,10 +1710,7 @@ $('#hidemap').click(function(){
   console.log("removed");
   layerMappedPolygons.addTo(map);
   console.log("reloaded");
-
-
 });
-
 
 
 //4.2 LOADING ROAD NETWORK DATA
@@ -1993,25 +1766,6 @@ $(document).ready(function(){
 
 
 //PARSING THE UTILITIES DATA
-  // $(document).ready(function(){
-  //   $.ajax(electricity).done(function(data) {
-  //     parsedData_majorroads = JSON.parse(data);
-  //     console.log(parsedData_majorroads);
-  //     console.log("parsed14");
-  //     console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
-  //   });
-  // });
-
-  // $(document).ready(function(){
-  //   $.ajax(water).done(function(data) {
-  //     parsedData_water = JSON.parse(data);
-  //     console.log(parsedData_water);
-  //     console.log("parsed14");
-  //     console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
-  //   });
-  // });
-
-
 
 //PARSING THE PUBLIC HEALTH DATA
 //PARSING THE HOSPITALS

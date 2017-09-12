@@ -13,11 +13,11 @@ integrity="sha512-wcw6ts8Anuw10Mzh9Ytw4pylW8+NAD4ch3lqm9lzAsTxg0GFeJgoAtxuCLREZS
 crossorigin=""/>
 
 
-1. The Upload function
+<!-- 1. The Upload function
 ref: https://fineuploader.com/demos.html
 https://stackoverflow.com/questions/5587973/javascript-upload-file
 https://stackoverflow.com/questions/1109728/how-to-create-a-website-which-uploads-download-data-from-to-database-and-excel
-https://github.com/gka/pyshpgeocode
+https://github.com/gka/pyshpgeocode -->
 
 
 
@@ -94,18 +94,6 @@ https://github.com/gka/pyshpgeocode
             <option class = "option" id="district" value = "district">District</option>
             <option class = "option" id="neighborhood" value = "neighborhood">Neighborhood</option>
           </select>
-          <!-- <select name="basemaps" id="location2" onChange="changeBasemap2(this)">
-            <option class = "option" value="">Department</option>
-            <option class = "option" value="Peten">Peten</option>
-            <option class = "option" value="Guatemala">Guatemala</option>
-            <option class = "option" value="Alta Verapaz">Alta Verapaz</option>
-          </select>
-          <select name="basemaps" id="location3" onChange="changeBasemap3(this)">
-            <option class = "option" value="">Municipality</option>
-            <option class = "option" value="La Libertad">La Libertad</option>
-            <option class = "option" value="Guatemala">Guatemala</option>
-            <option class = "option" value="Coban">Coban</option>
-          </select> -->
         </div>
         <br>
 
@@ -113,15 +101,21 @@ https://github.com/gka/pyshpgeocode
         <br>
         <label class="selectionlabel" for="dest">Extreme Heat</label>
         <br>
-        <label class="layerlabel">High Frequency</label>
-        <!-- <button>UPLOAD</button> -->
+        <label class="layerlabel" id = "upload">High Frequency
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <button>upload</button>
+        </label>
         <br>
-        <label class="layerlabel">Medium Frequency</label>
-        <!-- <button>UPLOAD</button> -->
+        <label class="layerlabel">Medium Frequency
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <button>upload</button>
+        </label>
         <br>
-        <label class="layerlabel">Low Frequency</label><br>
+        <label class="layerlabel">Low Frequency
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+          <button>upload</button>
+        </label><br>
         <br>
-        <!-- <button>UPLOAD</button> -->
         <br>
 
         <label class="selectionlabel" for="dest">Vegetation</label>
@@ -158,7 +152,7 @@ https://github.com/gka/pyshpgeocode
      </div>
      <div style="display:inline-block; position:relative; over-flow:auto; bottom: -5px; left:-6px; z-index:50;">
        <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
-         Show the Map
+         Run the Analysis
        </button>
        <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
          Clear Selection
@@ -217,7 +211,6 @@ https://github.com/gka/pyshpgeocode
       <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <!-- <li id = "global"><a href="#">Global</a></li> -->
         <li class = "option" id = "Global"><a href="#">Global</a></li>
         <li class = "option" id = "Regional"><a href="#">Regional</a></li>
         <li class = "option" id = "AOI"><a href="#">AOI</a></li>
@@ -241,13 +234,11 @@ https://github.com/gka/pyshpgeocode
   </div>
 
   <div class="description">
-    <!-- <div desarea> -->
       <p id = "destext1">
         <strong>Brief Description</strong>
         <br><br>
         This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. Some have begun to take steps to adapt to threats intensified by climate change, such as flooding, bushfires, heatwaves, and rising sea levels. Projects include: By installing protective and/ or resilient technologies and materials in properties that are prone to flooding.
       </p>
-    <!-- </div> -->
 
     <div class = "surveyarea">
       <p id = "destext2">
@@ -298,24 +289,8 @@ https://github.com/gka/pyshpgeocode
     <canvas class="charts" id="myImage1"></canvas>
   </div>
 
-  <!-- <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150"
-     id="myImg"
-     alt="Image"
-     width="650"
-     height="150"
-     z-index="90"> -->
-
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-
-  <!-- <div id="mapimage">
-    <img src="https://placeholdit.imgix.net/~text?txtsize=33&txt=350%C3%97150&w=350&h=150" display:none
-      id="myImg"
-      alt="Image"
-      width="180"
-      height="120">
-  </div> -->
 
   <!-- A click on  -->
   <!-- Javascript Imports -->
