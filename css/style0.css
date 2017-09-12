@@ -167,8 +167,8 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
 
 .legend {
         position:absolute;
-        bottom:20px;
-        left:380px;
+        bottom:315px;
+        left:400px;
         width:170px;
         height:220px;
         font-family: Arial, sans-serif;

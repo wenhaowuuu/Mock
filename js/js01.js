@@ -5,7 +5,23 @@
 // https://aws.amazon.com/public-datasets/landsat/
 // https://blog.mapbox.com/processing-landsat-8-using-open-source-tools-d1c40d442263
 
+// 1. the tiff is not hostable.
+// https://stackoverflow.com/questions/39143900/displaying-tiff-image-in-google-maps
 
+// good resources:
+// https://gis.stackexchange.com/questions/97943/how-to-open-geotiff-as-base-layer-on-openlayers
+// https://www.researchgate.net/post/How_can_i_display_and_load_geotiff_images_in_web_browser_from_my_desktop_do_processing_on_itWhich_programming_language_can_be_used_for_this
+// GREAT EXAMPLE OF USER INTERACTIVITY WITH HEAT MAP!!!
+// https://openlayers.org/en/latest/examples/heatmap-earthquakes.html
+// TILE MILL
+// https://tilemill-project.github.io/tilemill/docs/crashcourse/introduction/
+
+
+// THREE METHODS TO GET SATELLITE IMAGES:
+// 1. USE MAPBOX - FAKE THE LOGO AND THE MARKS
+// 2. EXPORT HIGH RESOLUTION AERIAL IMAGE FROM ARCGIS, THEN GEOREFERENCING, THEN SET THE MAXIMUM BOUNDARY
+// USER CAN ZOOM INTO, THEN
+// 3. OTHER WAYS TO GET AROUND.
 
 
 // THE RUNNING NUMBERS ANIMATION
@@ -78,7 +94,7 @@ function checkTime(i) {
 //1.1 SETUP BASEMAP
 //SOME NOTES HERE
 var map = L.map('map', {
-  center: [44.410606, 8.934083],
+  center: [45.069799, 7.682122],
   zoom: 5
 });
 
@@ -91,7 +107,22 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
   subdomains: 'abcd'
 }).addTo(map);
-//
+
+
+// LOAD THE PROCESSED IMAGE
+// var imageUrl = 'flooding-01.png';
+var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
+imageBounds = [[45.161777,7.839621], [44.972073,7.515590]];
+
+// var imageBounds = {
+//   north: 45.161777,
+//   south: 44.972073,
+//   east: 7.839621,
+//   west: 7.515590
+// };
+
+L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
 // var schoolicon = L.icon({
 //       iconUrl:'marker-icon.png',
 //       iconSize:[15,24],
@@ -449,19 +480,18 @@ var changeBasemap1 = function(location1){
   var value1 = location1.value;
   console.log(value1);
   if(value1 == 'regional'){
-      map.setView([44.410606, 8.934083],5);
+      map.setView([45.069799, 7.682122],5);
   }
   if(value1 == 'city'){
-      map.setView([44.410606, 8.934083],9);
+      map.setView([45.069799, 7.682122],9);
   }
   if(value1 == 'district'){
-      map.setView([44.410606, 8.934083],11);
+      map.setView([45.069799, 7.682122],11);
   }
   if(value1 == 'neighborhood'){
-      map.setView([44.410606, 8.934083],14);
+      map.setView([45.069799, 7.682122],14);
   }
 };
-
 
 var changeBasemap3 = function(location3){
   var value3 = location3.value;

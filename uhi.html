@@ -99,36 +99,38 @@ https://github.com/gka/pyshpgeocode -->
 
         <label class="selectionlabel" for="dest">DATA UPLOAD</label>
         <br>
-        <label class="selectionlabel" for="dest">Extreme Heat</label>
+        <label class="selectionlabel" for="dest">Analysis Boundary</label>
         <br>
-        <label class="layerlabel" id = "upload">High Frequency
+        <label class="layerlabel" id = "upload">Province
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <button>upload</button>
         </label>
         <br>
-        <label class="layerlabel">Medium Frequency
+        <label class="layerlabel">Municipality
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <button>upload</button>
         </label>
         <br>
-        <label class="layerlabel">Low Frequency
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <label class="layerlabel">District
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <button>upload</button>
         </label><br>
         <br>
         <br>
 
-        <label class="selectionlabel" for="dest">Vegetation</label>
+        <label class="selectionlabel" for="dest">Background Information</label>
         <br>
         <input id="clinic" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Forest</label><br>
+        <label class="layerlabel">Population</label><br>
         <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Pastures</label><br>
+        <label class="layerlabel">Vegetation</label><br>
         <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Grassland</label><br>
+        <label class="layerlabel">Building Footprints</label><br>
+        <input id="hospital" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Hazards</label><br>
         <br>
 
-        <label class="selectionlabel" for="dest">Water Availability</label>
+        <!-- <label class="selectionlabel" for="dest">Water Availability</label>
         <br>
         <input id="electricity" class="layers" type="checkbox" name="vehicle" value="Bike">
         <label class="layerlabel">Rain</label><br>
@@ -136,18 +138,7 @@ https://github.com/gka/pyshpgeocode -->
         <label class="layerlabel">River</label><br>
         <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
         <label class="layerlabel">Groundwater</label><br>
-        <br>
-
-        <label class="selectionlabel" for="dest">Energy Use</label>
-        <br>
-        <input id="electricity" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">High Comsuption</label><br>
-        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Medium Consumption</label><br>
-        <input id="water" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Low Consumption</label><br>
-        <br>
-
+        <br> -->
 
      </div>
      <div style="display:inline-block; position:relative; over-flow:auto; bottom: -5px; left:-6px; z-index:50;">
@@ -266,8 +257,8 @@ https://github.com/gka/pyshpgeocode -->
 
   <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
   <!-- //OPTIONAL LEGEND OBJECT -->
-  <!-- <div class="legend">
-      <h5>Poverty Rates of Municipalities</h5>
+  <div class="legend">
+      <h5>Urban Heat Island Effect in Torino</h5>
       <div>
         <div class = label1 id = fill1></div><p class = label1> < 10%</p>
       </div>
@@ -283,11 +274,11 @@ https://github.com/gka/pyshpgeocode -->
       <div>
         <div class = label1 id = fill5></div><p class = label1> > 75%</p>
       </div>
-  </div> -->
-
+  </div>
+<!--
   <div class = "locationmap">
     <canvas class="charts" id="myImage1"></canvas>
-  </div>
+  </div> -->
 
 
 <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

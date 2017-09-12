@@ -1,0 +1,13 @@
+{
+  "name": "processed_tiffs_2",
+  "version": "1.1.0",
+  "description": "",
+  "type": "baselayer",
+  "color": "#FFFFFF",
+  "format": "jpg",
+  "minzoom": "9",
+  "maxzoom": "13",
+  "scale": "1.000000",
+  "bounds": [7.46439845, 44.97214025, 7.84090990, 45.14767771],
+  "profile": "mercator"
+}

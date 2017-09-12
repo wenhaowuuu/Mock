@@ -1,0 +1,12 @@
+{
+  "name": "processed_tiffs_3",
+  "version": "1.1.0",
+  "description": "",
+  "type": "overlay",
+  "format": "png",
+  "minzoom": "9",
+  "maxzoom": "13",
+  "scale": "1.000000",
+  "bounds": [7.46459343, 44.97210005, 7.84047240, 45.14799768],
+  "profile": "mercator"
+}
