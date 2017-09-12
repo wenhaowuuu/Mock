@@ -1,4 +1,13 @@
 //AS OF SEPTEMBER 12TH, THE UPDATE HERE
+
+//HOSTING FREE SATELLITE IMAGE
+// https://gis.stackexchange.com/questions/113683/free-web-service-providing-satellite-images
+// https://aws.amazon.com/public-datasets/landsat/
+// https://blog.mapbox.com/processing-landsat-8-using-open-source-tools-d1c40d442263
+
+
+
+
 // THE RUNNING NUMBERS ANIMATION
 $('.count').each(function () {
     $(this).prop('Counter',0).animate({
