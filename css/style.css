@@ -43,6 +43,19 @@
   animation-delay: 4s;
 }
 
+
+.icon
+{
+  position:relative;
+  margin:auto;
+  /*width:204px;
+  height:204px;*/
+  width:102%;
+  height:102%;
+  align-items:center;
+}
+
+
 .count
 {
   font-family: 'Roboto', sans-serif;
@@ -433,6 +446,7 @@ div.description{
   border-radius: 50%;
   border: 2px solid;
   border-color:#D6EAF8;
+  align-items:center;
 }
 
 .btn2 {
@@ -442,6 +456,7 @@ div.description{
   border-radius: 50%;
   border: 2px solid;
   border-color: #F5B7B1;
+  align-items:center;
 }
 
 .btn3 {
@@ -451,6 +466,7 @@ div.description{
   border-radius: 50%;
   border: 2px solid;
   border-color: #F9E79F;
+  align-items:center;
 }
 
 .btn4 {
@@ -460,6 +476,7 @@ div.description{
   border-radius: 50%;
   border: 2px solid;
   border-color: #ABEBC6;
+  align-items:center;
 }
 
 
