@@ -25,10 +25,6 @@
   /*-webkit-border-radius: 50px;*/
   /*border-radius: 50px;*/
 
-
-
-
-
   opacity:0;
   -webkit-animation:fadeIn ease-in 1;
   -moz-animation:fadeIn ease-in 1;
@@ -610,7 +606,7 @@ div.description{
 #fade-in3 {
   position: relative;
   margin: auto;
-  left: 64px;
+  left: 58px;
   top: 30px;
   font-family:'Roboto Condensed',sans-serif;
   /*font-weight: lighter;*/
@@ -643,7 +639,7 @@ div.description{
 #fade-in4 {
   position: relative;
   margin: auto;
-  left: 50px;
+  left: 62px;
   top: 30px;
   font-family:'Roboto Condensed',sans-serif;
   /*font-weight: lighter;*/
