@@ -1286,7 +1286,7 @@ $(document).ready(function(){
 
         var boundary = L.geoJson(parsedData_torinoboundary,
           {
-            style: {opacity:0.4,width:0.5,color:'#2897E9'},
+            style: {opacity:0.7,width:1.2,color:'#FA2712', fillOpacity:0},
             pointToLayer: function (feature, latlng) {
               return new L.Polygon(latlng, {
               });
