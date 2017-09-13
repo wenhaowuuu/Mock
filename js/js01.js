@@ -164,8 +164,8 @@ $('#satellite').click(function(){
 //1.2 LOAD THE PROCESSED IMAGE
 // var imageUrl = 'flooding-01.png';
 // var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
-var imageUrl = 'Torino_Sentinel2_28Mar2017_new.png',
-imageBounds = [[45.146577,7.835611], [44.999573,7.520595]];
+var imageUrl = 'Torino_base_citywide.png',
+imageBounds = [[45.142949,7.820598], [44.98445,7.514261]];
 // var imageBounds = {
 //   north: 45.161777,
 //   south: 44.972073,
@@ -174,6 +174,21 @@ imageBounds = [[45.146577,7.835611], [44.999573,7.520595]];
 // };
 
 L.imageOverlay(imageUrl, imageBounds).addTo(map);
+
+
+//LOAD THE ZOOM-IN IMAGE
+var imagezoomUrl = 'Torino_base_0913.png',
+imagezoomBounds = [[45.029872,7.647414], [45.017178,7.622817]];
+// var imageBounds = {
+//   north: 45.161777,
+//   south: 44.972073,
+//   east: 7.839621,
+//   west: 7.515590
+// };
+
+L.imageOverlay(imagezoomUrl, imagezoomBounds).addTo(map);
+
+
 // var schoolicon = L.icon({
 //       iconUrl:'marker-icon.png',
 //       iconSize:[15,24],
@@ -430,7 +445,7 @@ var changeBasemap1 = function(location1){
       map.setView([45.069799, 7.682122],11);
   }
   if(value1 == 'neighborhood'){
-      map.setView([45.069799, 7.682122],14);
+      map.setView([45.021413, 7.634196],16.5);
   }
 };
 
@@ -1307,35 +1322,69 @@ $('#showmap').click(function(){
 
 //NOT ENABLING THE PARAMETER CONTROL FOR NOW, BUT WILL HAVE TO MAKE IT WORK!
     // if (c1 == true){
-          HighHazards = L.geoJson(parsedData_highhazards,
-            {
-              style: {opacity:0.9,width:0.5,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.75},
-              pointToLayer: function (feature, latlng) {
-                return new L.Polygon(latlng, {
-                });
-              },
-              }).addTo(map);
+
+    //CITY-WIDE IMAGE OVERLAY
+          // HighHazards = L.geoJson(parsedData_highhazards,
+          //   {
+          //     style: {opacity:0.9,width:0.5,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.75},
+          //     pointToLayer: function (feature, latlng) {
+          //       return new L.Polygon(latlng, {
+          //       });
+          //     },
+          //     }).addTo(map);
+          //
+          //
+          // MediumHazards = L.geoJson(parsedData_mediumhazards,
+          //   {
+          //     style: {opacity:0.75,width:0.5,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.75},
+          //     pointToLayer: function (feature, latlng) {
+          //       return new L.Polygon(latlng, {
+          //       });
+          //     },
+          //     }).addTo(map);
+          //
+          // LowHazards = L.geoJson(parsedData_lowhazards,
+          //   {
+          //     style: {opacity:0.75,width:0.5,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.75},
+          //     pointToLayer: function (feature, latlng) {
+          //       return new L.Polygon(latlng, {
+          //       });
+          //     },
+          //     }).addTo(map);
 
 
-          MediumHazards = L.geoJson(parsedData_mediumhazards,
-            {
-              style: {opacity:0.75,width:0.5,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.75},
-              pointToLayer: function (feature, latlng) {
-                return new L.Polygon(latlng, {
-                });
-              },
-              }).addTo(map);
 
-          LowHazards = L.geoJson(parsedData_lowhazards,
-            {
-              style: {opacity:0.75,width:0.5,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.75},
-              pointToLayer: function (feature, latlng) {
-                return new L.Polygon(latlng, {
-                });
-              },
-              }).addTo(map);
+      //ZOOM-IN IMAGE OVERLAY
+              HighHazards = L.geoJson(parsedData_highhazards,
+                {
+                  style: {opacity:0.1,width:0.3,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.2},
+                  pointToLayer: function (feature, latlng) {
+                    return new L.Polygon(latlng, {
+                    });
+                  },
+                  }).addTo(map);
+
+
+              MediumHazards = L.geoJson(parsedData_mediumhazards,
+                {
+                  style: {opacity:0.1,width:0.3,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.2},
+                  pointToLayer: function (feature, latlng) {
+                    return new L.Polygon(latlng, {
+                    });
+                  },
+                  }).addTo(map);
+
+              LowHazards = L.geoJson(parsedData_lowhazards,
+                {
+                  style: {opacity:0.1,width:0.3,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.2},
+                  pointToLayer: function (feature, latlng) {
+                    return new L.Polygon(latlng, {
+                    });
+                  },
+                  }).addTo(map);
 
     // }
+
 
 
 

@@ -1456,6 +1456,7 @@ li{
   position:relative;
   right:5px;
   background-color:#EFC4AF;
+  /*fillopacity:0;*/
   height:10px;
   width:20px;
 }
@@ -1463,7 +1464,7 @@ li{
 #fill2{
   position:relative;
   right:5px;
-  background-color:#D48F6E;
+  background-color:#F71C0E;
   height:10px;
   width:20px;
 }
@@ -1471,7 +1472,7 @@ li{
 #fill3{
   position:relative;
   right:5px;
-  background-color:#DB7849;
+  background-color:#E3C715;
   height:10px;
   width:20px;
 }
@@ -1479,7 +1480,7 @@ li{
 #fill4{
   position:relative;
   right:5px;
-  background-color:#ED692A;
+  background-color:#81EC23;
   height:10px;
   width:20px;
 }
