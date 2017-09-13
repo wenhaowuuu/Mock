@@ -69,7 +69,7 @@
 //SOME NOTES HERE
 var map = L.map('map', {
   center: [45.069799, 7.682122],
-  zoom: 12
+  zoom: 12.2
 });
 
 // var Style = 'dark';
@@ -165,7 +165,7 @@ $('#satellite').click(function(){
 // var imageUrl = 'flooding-01.png';
 // var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
 var imageUrl = 'Torino_Sentinel2_28Mar2017_new.png',
-imageBounds = [[45.146577,7.836611], [44.999573,7.519595]];
+imageBounds = [[45.146577,7.835611], [44.999573,7.520595]];
 // var imageBounds = {
 //   north: 45.161777,
 //   south: 44.972073,
@@ -1275,7 +1275,8 @@ $(document).ready(function(){
       })
     });
 
-    //LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
+
+//LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
     $(document).ready(function(){
       $.ajax(torinoboundary).done(function(data) {
 
@@ -1299,77 +1300,121 @@ $(document).ready(function(){
 $('#showmap').click(function(){
   console.log(b1,b2,b3,b4,c1);
 
-  if (b1 == true){
-    // $(document).ready(function(){
-      // $.ajax(adm).done(function(data) {
-        Buildings = L.geoJson(parsedData_buildings,
-          {
-            style: {opacity:0.4,width:0.5,color:'#E0941K'},
-            pointToLayer: function (feature, latlng) {
-              return new L.Polygon(latlng, {
-              });
-            },
-            }).addTo(map);
-            // layerMappedPolygons.eachLayer(eachFeatureFunction);
-            // // console.log(layerMappedPolygons[0].id_1);
-          // })
-        // });
-  }
 
+//comments to Barry
 
+// I'm thinking to try exporting a high resolution aerial image from ArcMap with
 
-  if (b4 == true){
-    // $(document).ready(function(){
-      // $.ajax(adm).done(function(data) {
-        parsedData_greenspaces = L.geoJson(parsedData_greenspaces,
-          {
-            style: {opacity:0.4,width:0.5,color:'#EFF41K'},
-            pointToLayer: function (feature, latlng) {
-              return new L.Polygon(latlng, {
-              });
-            },
-            }).addTo(map);
-            // layerMappedPolygons.eachLayer(eachFeatureFunction);
-            // // console.log(layerMappedPolygons[0].id_1);
-          // })
-        // });
-  }
-
-  //LOAD PRIMARY ROAD NETWORK
-    if (b2 == true){
-      _.each(parsedData_railways,function(item){
-        var itemB = L.geoJson(parsedData_railways,
-          {
-            style: {opacity:0.6,width:1.2,color:'#DF722B'},
-            pointToLayer: function (feature, latlngs) {
-              return new L.polyline(latlngs, {
-              }
-            );
-          }}
-        ).addTo(map).bindPopup("railways");
-        Railways.push(itemB);
-      }
-      );
-      // selectedmaps.push(PrimaryRoads);
-    }
-
-    if (b3 == true){
-        //LOAD THE SECONDARY ROAD NETWORKS
-        _.each(parsedData_roads,function(item){
-          var itemB = L.geoJson(parsedData_roads,
+//NOT ENABLING THE PARAMETER CONTROL FOR NOW, BUT WILL HAVE TO MAKE IT WORK!
+    // if (c1 == true){
+          HighHazards = L.geoJson(parsedData_highhazards,
             {
-              style: {opacity:0.35,width:0.3,color:'#F7A920'},
+              style: {opacity:0.9,width:0.5,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.75},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+
+          MediumHazards = L.geoJson(parsedData_mediumhazards,
+            {
+              style: {opacity:0.75,width:0.5,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.75},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+          LowHazards = L.geoJson(parsedData_lowhazards,
+            {
+              style: {opacity:0.75,width:0.5,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.75},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+    // }
+
+
+
+
+
+    //LOAD PRIMARY ROAD NETWORK
+      if (b2 == true){
+        _.each(parsedData_railways,function(item){
+          var itemB = L.geoJson(parsedData_railways,
+            {
+              style: {opacity:0.65,width:1.2,color:'#DF722B'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
               );
             }}
-          ).addTo(map).bindPopup("roads");
-          Roads.push(itemB);
+          ).addTo(map).bindPopup("railways");
+          Railways.push(itemB);
         }
         );
-        // selectedmaps.push(SecondaryRoads);
+        // selectedmaps.push(PrimaryRoads);
+      }
+
+      if (b3 == true){
+          //LOAD THE SECONDARY ROAD NETWORKS
+          _.each(parsedData_roads,function(item){
+            var itemB = L.geoJson(parsedData_roads,
+              {
+                style: {opacity:0.65,width:0.2,color:'#190D75'},
+                pointToLayer: function (feature, latlngs) {
+                  return new L.polyline(latlngs, {
+                  }
+                );
+              }}
+            ).addTo(map).bindPopup("roads");
+            Roads.push(itemB);
+          }
+          );
+          // selectedmaps.push(SecondaryRoads);
+      }
+
+
+      if (b4 == true){
+        // $(document).ready(function(){
+          // $.ajax(adm).done(function(data) {
+            Greenspaces = L.geoJson(parsedData_greenspaces,
+              {
+                style: {opacity:0.4,width:0.5,color:'#08732C', fillColor: '#08732C', fillOpacity: 0.85},
+                pointToLayer: function (feature, latlng) {
+                  return new L.Polygon(latlng, {
+                  });
+                },
+                }).addTo(map);
+                // layerMappedPolygons.eachLayer(eachFeatureFunction);
+                // // console.log(layerMappedPolygons[0].id_1);
+              // })
+            // });
+      }
+
+
+
+
+    if (b1 == true){
+      // $(document).ready(function(){
+        // $.ajax(adm).done(function(data) {
+          Buildings = L.geoJson(parsedData_buildings,
+            {
+              style: {opacity:0.3,width:0.03, fillColor: '#06065B', fillOpacity: 0.7, color:'#06065B'},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+              // layerMappedPolygons.eachLayer(eachFeatureFunction);
+              // // console.log(layerMappedPolygons[0].id_1);
+            // })
+          // });
     }
+
 
 
     // if (x3 == true){
