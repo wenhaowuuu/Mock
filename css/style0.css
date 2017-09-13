@@ -1091,9 +1091,9 @@ div.intro p {
 
 .dropdown2{
   position:absolute;
-  right:370px;
-  top:30px;
-  z-index: 50;
+  right:4%;
+  top:7%;
+  z-index: 100;
 }
 
 #dropdownMenu1{

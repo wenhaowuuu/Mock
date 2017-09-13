@@ -1,5 +1,16 @@
 //AS OF SEPTEMBER 12TH, THE UPDATE HERE
 
+//SOME LEARNING RESOURCE ABOUT FIGURE GROUND IDENTIFICATION
+// the migration is complete.
+// TARGET: TO LEARN THE OSMNX TOOLBOX
+// AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
+// http://geoffboeing.com/
+
+//POLYGON EDITING OPERATIONS:
+//QUITE COOL HERE
+//https://codeofsumit.github.io/leaflet.pm/
+
+
 //HOSTING FREE SATELLITE IMAGE
 // https://gis.stackexchange.com/questions/113683/free-web-service-providing-satellite-images
 // https://aws.amazon.com/public-datasets/landsat/
@@ -16,6 +27,10 @@
 // TILE MILL
 // https://tilemill-project.github.io/tilemill/docs/crashcourse/introduction/
 
+// FLY TO CERTAIN LOCATION!!!
+//https://www.mapbox.com/mapbox-gl-js/example/scroll-fly-to/
+
+
 
 // THREE METHODS TO GET SATELLITE IMAGES:
 // 1. USE MAPBOX - FAKE THE LOGO AND THE MARKS
@@ -24,70 +39,29 @@
 // 3. OTHER WAYS TO GET AROUND.
 
 
-// THE RUNNING NUMBERS ANIMATION
-$('.count').each(function () {
-    $(this).prop('Counter',0).animate({
-        Counter: $(this).text()
-    }, {
-        duration: 50000,
-        easing: 'swing',
-        step: function (now) {
-            $(this).text(Math.ceil(now));
-        }
-    });
-});
-
-// THE FADE-OUT EFFECT 001
-//https://www.webdesignerdepot.com/2014/05/how-to-create-a-scrollable-splash-screen-with-css3-and-jquery/
-$.fn.center = function () {
-  this.css("position","absolute");
-  this.css("top", Math.max(0, (
-    ($(window).height() - $(this).outerHeight()) / 2) +
-     $(window).scrollTop()) + "px"
-  );
-  this.css("left", Math.max(0, (
-    ($(window).width() - $(this).outerWidth()) / 2) +
-     $(window).scrollLeft()) + "px"
-  );
-  return this;
-}
-
-$("#overlay").show();
-$("#overlay-content").show().center();
-
-$('.enter1').click(function () {
-    $(this).parent('.overlay').fadeOut(1200);
-});
 
 
 
-//ADD A TIMER
-function startTime() {
-    var today = new Date();
-    var mo = today.getMonth() + 1;
-    var d = today.getDate();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-    document.getElementById('txt').innerHTML =
-    mo + "-" + d + " " + h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);
-}
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
+// //ADD A TIMER
+// function startTime() {
+//     var today = new Date();
+//     var mo = today.getMonth() + 1;
+//     var d = today.getDate();
+//     var h = today.getHours();
+//     var m = today.getMinutes();
+//     var s = today.getSeconds();
+//     m = checkTime(m);
+//     s = checkTime(s);
+//     document.getElementById('txt').innerHTML =
+//     mo + "-" + d + " " + h + ":" + m + ":" + s;
+//     var t = setTimeout(startTime, 500);
+// }
+// function checkTime(i) {
+//     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+//     return i;
+// }
 
-//the migration is complete.
-// TARGET: TO LEARN THE OSMNX TOOLBOX
-// AUTOMATICALLY IDENTIFY AND GENERATE STREET NETWORK
-// http://geoffboeing.com/
 
-//POLYGON EDITING OPERATIONS:
-//QUITE COOL HERE
-//https://codeofsumit.github.io/leaflet.pm/
 
 ///1. SETUP AND BASEMAP
 
@@ -101,7 +75,6 @@ var map = L.map('map', {
 // var Style = 'dark';
 var Style = 'light';
 
-
 L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.png', {
   maxZoom: 18,
   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://carto.com/attribution">CARTO</a>',
@@ -109,7 +82,86 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/'+ Style + '_all/{z}/{x}/{y}@2x.pn
 }).addTo(map);
 
 
-// LOAD THE PROCESSED IMAGE
+
+//1.3 LOAD SATELLITE MAP
+$('#satellite').click(function(){
+  $('#map').hide();
+  $('#map0').show();
+  mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
+  var map0 = new mapboxgl.Map({
+      container: 'map0', // container id
+      style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
+      center: [7.682122, 45.069799], // starting position
+      zoom: 11.5 // starting zoom
+  });
+
+  var editorData = $.ajax(
+    {
+      url:"https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson"
+    }
+  ).done(function(data){
+          // console.log("downloadxxx");
+          map0.on('load', function () {
+
+            //REFERENCE ON LOADING ELEMENTS ON MAPBOX'S MAP
+            // https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5
+            // http://lyzidiamond.com/posts/external-geojson-mapbox
+            // http://lyzidiamond.com/posts/external-geojson-mapbox
+
+            //TESTING
+            map0.addLayer({
+                        'id': 'boundarys',
+                        'type': 'fill',
+                        'source': {
+                        'type': 'geojson',
+                              'data': {
+                                        'type': 'Feature',
+                                        'geometry': {
+                                        'type': 'Polygon',
+                                        'coordinates': [[
+                                                  [-90.583466, 10.571087],
+                                                  [-90.583466, -10.333333],
+                                                  [-70.589323, -10.333333],
+                                                  [-70.589323, 10.571087]
+                                                ]]
+                                                }
+                                        }
+                                },
+                          'layout': {},
+                                'paint': {
+                                    'fill-color': '#0000ff',
+                                    'fill-opacity': 0.5
+                                 }
+                          });
+
+
+            //add source
+              map0.addSource(
+                "myData",{
+                  type:"geojson",
+                  data:data
+                }
+              );
+
+           //LOAD MUNICIPALITIES///////
+            map0.addLayer({
+                  'id': 'shapes',
+                  'type': 'fill',
+                  'source': "myData",
+                  'layout': {},
+                  'paint': {
+                      'fill-color': '#00ffff',
+                      'fill-opacity': 0.8
+                  }
+                });
+
+          });
+      });
+  });
+
+
+
+//1.2 LOAD THE PROCESSED IMAGE
 // var imageUrl = 'flooding-01.png';
 var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
 imageBounds = [[45.161777,7.839621], [44.972073,7.515590]];
@@ -206,80 +258,6 @@ $('#dark').click(function(){
   }).addTo(map);
 });
 
-//1.3 LOAD SATELLITE MAP
-$('#satellite').click(function(){
-  $('#map').hide();
-  $('#map0').show();
-  mapboxgl.accessToken = 'pk.eyJ1Ijoid2VuaGFvYnJpYW4iLCJhIjoiY2owaXNrNzhnMDB4ZjJxdGoxdHdkd2VibiJ9.Cn_2Ypo7UctdNZHt6OlDHA';
-  var map0 = new mapboxgl.Map({
-      container: 'map0', // container id
-      style: 'mapbox://styles/mapbox/satellite-v9', //stylesheet location
-      center: [-88.509107, 15.162820], // starting position
-      zoom: 6 // starting zoom
-  });
-
-  var editorData = $.ajax(
-    {
-      url:"https://raw.githubusercontent.com/wenhaowuuu/InfrastructureEfficiency/master/data/muni_northerntriangle.geojson"
-    }
-  ).done(function(data){
-          // console.log("downloadxxx");
-          map0.on('load', function () {
-            //REFERENCE ON LOADING ELEMENTS ON MAPBOX'S MAP
-            // https://gist.github.com/danswick/339d00429ed5a201e0d7ef4fac648fa5
-            // http://lyzidiamond.com/posts/external-geojson-mapbox
-            // http://lyzidiamond.com/posts/external-geojson-mapbox
-
-            //TESTING
-            map0.addLayer({
-                        'id': 'boundarys',
-                        'type': 'fill',
-                        'source': {
-                        'type': 'geojson',
-                              'data': {
-                                        'type': 'Feature',
-                                        'geometry': {
-                                        'type': 'Polygon',
-                                        'coordinates': [[
-                                                  [-90.583466, 10.571087],
-                                                  [-90.583466, -10.333333],
-                                                  [-70.589323, -10.333333],
-                                                  [-70.589323, 10.571087]
-                                                ]]
-                                                }
-                                        }
-                                },
-                          'layout': {},
-                                'paint': {
-                                    'fill-color': '#0000ff',
-                                    'fill-opacity': 0.5
-                                 }
-                          });
-
-
-            //add source
-              map0.addSource(
-                "myData",{
-                  type:"geojson",
-                  data:data
-                }
-              );
-
-           //LOAD MUNICIPALITIES///////
-            map0.addLayer({
-                  'id': 'shapes',
-                  'type': 'fill',
-                  'source': "myData",
-                  'layout': {},
-                  'paint': {
-                      'fill-color': '#00ffff',
-                      'fill-opacity': 0.8
-                  }
-                });
-
-          });
-      });
-  });
 
 // 1.3 SWITCHING SCALES
     // $('#regional').click(function(){
@@ -535,6 +513,61 @@ var changeBasemap3 = function(location3){
           };
       });
   }
+};
+
+
+
+//FOR THE SATELLITE MAP
+var changeBasemap01 = function(location1){
+  var value1 = location1.value;
+  console.log(value1);
+  if(value1 == 'regional'){
+
+    map0.fitBounds([[
+        14.682122,
+        50.069799
+    ], [
+        0.682122,
+        40.069799
+    ]]);
+  }
+  if(value1 == 'city'){
+      // map0.setView([45.069799, 7.682122],9);
+      map0.fitBounds([[
+          10.682122,
+          47.069799
+      ], [
+          4.682122,
+          43.069799
+      ]]);
+  }
+  if(value1 == 'district'){
+      // map0.setView([45.069799, 7.682122],11);
+      map0.fitBounds([[
+          12.682122,
+          46.069799
+      ], [
+          6.682122,
+          44.069799
+      ]]);
+  }
+  if(value1 == 'neighborhood'){
+      // map0.setView([45.069799, 7.682122],14);
+      map0.fitBounds([[
+          8.182122,
+          45.369799
+      ], [
+          7.182122,
+          44.769799
+      ]]);
+  }
+};
+
+
+// COMBINED FUNCTIONS
+var Basemap = function(location1){
+  changeBasemap1(location1);
+  changeBasemap01(location1);
 };
 
 //3. FUNCTIONS
