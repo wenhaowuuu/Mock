@@ -69,7 +69,7 @@
 //SOME NOTES HERE
 var map = L.map('map', {
   center: [45.069799, 7.682122],
-  zoom: 5
+  zoom: 12
 });
 
 // var Style = 'dark';
@@ -163,9 +163,9 @@ $('#satellite').click(function(){
 
 //1.2 LOAD THE PROCESSED IMAGE
 // var imageUrl = 'flooding-01.png';
-var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
-imageBounds = [[45.161777,7.839621], [44.972073,7.515590]];
-
+// var imageUrl = 'https://preview.ibb.co/nyk5PF/Torino_Sentinel2_28_Mar2017_PS.png',
+var imageUrl = 'Torino_Sentinel2_28Mar2017_new.png',
+imageBounds = [[45.146577,7.836611], [44.999573,7.519595]];
 // var imageBounds = {
 //   north: 45.161777,
 //   south: 44.972073,
@@ -174,7 +174,6 @@ imageBounds = [[45.161777,7.839621], [44.972073,7.515590]];
 // };
 
 L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
 // var schoolicon = L.icon({
 //       iconUrl:'marker-icon.png',
 //       iconSize:[15,24],
@@ -258,86 +257,52 @@ $('#dark').click(function(){
   }).addTo(map);
 });
 
-
 // 1.3 SWITCHING SCALES
-    // $('#regional').click(function(){
-    //   map.setView([44.410606, 8.934083],6.5);
-    // });
-    //
-    // $('#city').click(function(){
-    //   map.setView([44.410606, 8.934083],9);
-    // });
-    //
-    // $('#district').click(function(){
-    //   map.setView([44.410606, 8.934083],10.5);
-    // });
-    //
-    // $('#neighborhood').click(function(){
-    //   map.setView([44.410606, 8.934083],12);
-    // });
+
 
 // 2. CREATE VARIABLES
 // 2.1 DATA SOURCE URLS
-  //THE ITALIAN ADMINISTRATIVE BOUNDARY
+  //FOR HELSINKI PROJECTS
+  //2.1.1 BASIC DATA
   var adm = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/ita_adm1_1.geojson";
+  var torinoboundary = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/base_tolimit_regiongp_2011_torino.geojson";
 
-  //THE CLEANED DATASET
-  var muni_clean = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/nt_muni_joined_clean.geojson";
+  // 2.1.2 BACKGROUND INFO
+  // B1, B2, B3, B4, B5
+  var buildings = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/infr_buildings_reggp_2010_torino.geojson";
+  var railways = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/infr_railway_reggp_2010_torino.geojson";
+  var roads = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/infr_roads_reggp_2012_torino.geojson";
+  var greenspaces = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/ecoh_greenareas_togp_2003_torino.geojson";
 
-  // ADM
-  var Guatemala = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/guatemala.geojson?token=AWa3ujj3WJDeoABdZInPIhnTSYkS3B5Kks5Zd5vrwA%3D%3D";
-  var Honduras = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/Honduras.geojson?token=AWa3uvKtwxzSEa1dGdu8oqlVEMSPY5alks5Zd5xEwA%3D%3D";
-  var Salvador = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/SalVardo.geojson?token=AWa3us5Y4fPzPzYtApgHmkKpUFki0Dekks5Zd5w0wA%3D%3D";
-  var department = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/dept_joinbase.geojson?token=AWa3ulA7r0EP6hvXnzERqDWlb0C1DWkeks5Zd5HUwA%3D%3D";
-
-  //TRANSPORTATION
-  // X1, X2, X3, X4, X5
-  var majorroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_1MAJOR.geojson";
-  var secondaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_2SECOND.geojson";
-  var tertiaryroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/RD_3TERTIARY.geojson";
-  var urbanroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/rd_urban.geojson";
-  var ruralroads = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/rd_rural.geojson";
-
-  //UTILITIES
-  // Y1, Y2
-
-  //PUBLIC HEALTH
-  // M1, M2
-  var hospital = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_hospital_muni_joined_clean.geojson";
-  var clinic = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_nonhospital.geojson";
-
-  //EDUCATION
-  // W1, W2, W3
-  var school = "https://raw.githubusercontent.com/wenhaowuuu/ProjectDataX/master/data/infr_schools_muni_joined_clean.geojson";
+  // 2.1.2 HAZARDS INFO
+  // C1
+  var hazards_h = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/uhi_h_exp.geojson";
+  var hazards_m = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/uhi_m_exp.geojson";
+  var hazards_l = "https://raw.githubusercontent.com/wenhaowuuu/Mock/master/data/uhi_l_exp.geojson";
 
 // 2.2 VARIABLES
-  var PrimaryRoads = [ ];
-  var SecondaryRoads = [ ];
-  var TertiaryRoads = [ ];
-  var UrbanRoads = [ ];
-  var RuralRoads = [ ];
+  var Buildings = [ ];
+  var Railways = [ ];
+  var Roads = [ ];
+  var Greenspaces = [ ];
 
-  var Hospitals = [ ];
-  var Clinics = [ ];
+  var HighHazards = [ ];
+  var MediumHazards = [ ];
+  var LowHazards = [ ];
 
-  var PrimarySchools = [ ];
-  var MiddleSchools = [ ];
-  var HighSchools = [ ];
 
-  var Schools = [ ];
-
-  var layerselected = [];
-  var namelist = [];
-  var namelistvalue = [];
-  var order = 0;
   var list = ' ';
   var blank = '  ';
 
-  var slideNumber = 0;
-  var parsedData;
-  var parsedData2;
-  var parsedData3;
-  var parsedData4;
+  var parsedData_buildings;
+  var parsedData_railways;
+  var parsedData_roads;
+  var parsedData_greenspaces;
+
+  var parsedData_highhazards;
+  var parsedData_mediumhazards;
+  var parsedData_lowhazards;
+
   var filterFunction;
 
   //set layer selection variables
@@ -346,6 +311,42 @@ $('#dark').click(function(){
   var selectedlayer;
   var mapURL;
   var img;
+
+  // var PrimaryRoads = [ ];
+  // var SecondaryRoads = [ ];
+  // var TertiaryRoads = [ ];
+  // var UrbanRoads = [ ];
+  // var RuralRoads = [ ];
+  //
+  // var Hospitals = [ ];
+  // var Clinics = [ ];
+  //
+  // var PrimarySchools = [ ];
+  // var MiddleSchools = [ ];
+  // var HighSchools = [ ];
+  //
+  // var Schools = [ ];
+  //
+  // var layerselected = [];
+  // var namelist = [];
+  // var namelistvalue = [];
+  var order = 0;
+  var list = ' ';
+  var blank = '  ';
+
+  // var slideNumber = 0;
+  // var parsedData1;
+  // var parsedData2;
+  // var parsedData3;
+  // var parsedData4;
+  // var filterFunction;
+
+  //set layer selection variables
+  // var layerMappedPolygons;
+  // var selectedmuni_name = '';
+  // var selectedlayer;
+  // var mapURL;
+  // var img;
 
   //DEFINE THE IE SCORING FACTORS FOR THE RADAR CHART
   var RD_1ST;
@@ -413,46 +414,8 @@ var P_rd_3 = ' ';
 var P_rd_21 = ' ';
 var P_rd_31 = ' ';
 
-//LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
-$(document).ready(function(){
-  $.ajax(adm).done(function(data) {
-    parsedData000 = JSON.parse(data);
-    console.log(parsedData000);
-    console.log("parsed000");
-    layerMappedPolygons = L.geoJson(parsedData000,
-      {
-        style: {opacity:0.4,width:0.5,color:'#E0903F'},
-        pointToLayer: function (feature, latlng) {
-          return new L.Polygon(latlng, {
-          });
-        },
 
-        onEachFeature: function(feature,layer){
-
-          layer.bindPopup(
-            "<b>Region Name: </b>" +
-            feature.properties.name_1 +
-            "</br>" +
-
-            "<b>Total Area: </b>" + "10,795 " + "sq km" +
-            "</br>" +
-
-            "<b>Total Population: </b>" + "570,000" +
-            "</br>" +
-
-            "</br>" +
-            "<b>Data Collected Year: </b>" + "2014"
-          )
-
-         }
-        }).addTo(map);
-        layerMappedPolygons.eachLayer(eachFeatureFunction);
-        // console.log(layerMappedPolygons[0].id_1);
-      })
-    });
-
-
-//ZOOM TO SELECTED LOCATIONS
+//ZOOM TO SELECTED SCALE
 //ANOTHER METHOD HERE: http://learn.jquery.com/using-jquery-core/faq/how-do-i-get-the-text-value-of-a-selected-option/
 var changeBasemap1 = function(location1){
   var value1 = location1.value;
@@ -664,7 +627,6 @@ var Basemap = function(location1){
 
       console.log(layer.feature.properties);
 
-
        //TO ADD THE RE-CLICK THEN DE-SELECT FUNCTION
        //you can't really do this because the number of times clicked is not stored with the layer itself.
        //come back to this later!
@@ -857,7 +819,6 @@ var Basemap = function(location1){
          // }
 
          // TEST 002 - LET'S TRY FILTER
-
          // var myFilter = function(feature) {
          //      if (feature.properties.gen_pov===' ') {
          //      return false;
@@ -1176,8 +1137,9 @@ var myFilter = function(feature) {
 
 // console.log(document.getElementById("infrastructure").checked);
 //ADD THE LAYERS TO THE MAP
-var selectedmaps = [];
-var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
+
+// var selectedmaps = [];
+// var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
 
 // $('#nation').change(function(){
 //   if(this.checked){
@@ -1210,180 +1172,173 @@ var x1, x2, x3, x4, x5, y1, y2, m1, m2, w1, w2, w3;
 //   }
 // });
 
-
-// TRANSPORTATION
-$('#roads1').change(function(){
+// CHECKING OPTIONS
+var selectedmaps = [];
+var b1, b2, b3, b4, b5, c1
+$('#buildings').change(function(){
   if(this.checked){
-    x1 = true;
+    b1 = true;
   }
   if(!this.checked){
-    x1 = false;
+    b1 = false;
   }
 });
 
-$('#roads2').change(function(){
+$('#railways').change(function(){
   if(this.checked){
-    x2 = true;
+    b2 = true;
   }
   if(!this.checked){
-    x2 = false;
+    b2 = false;
   }
 });
 
-$('#roads3').change(function(){
+$('#roads').change(function(){
   if(this.checked){
-    x3 = true;
+    b3 = true;
   }
   if(!this.checked){
-    x3 = false;
+    b3 = false;
   }
 });
 
-$('#roads4').change(function(){
+$('#greenspaces').change(function(){
   if(this.checked){
-    x4 = true;
+    b4 = true;
   }
   if(!this.checked){
-    x4 = false;
+    b4 = false;
   }
 });
 
-$('#roads5').change(function(){
+
+$('#uhihazards').change(function(){
   if(this.checked){
-    x5 = true;
+    c1 = true;
   }
   if(!this.checked){
-    x5 = false;
+    c1 = false;
   }
 });
 
-//UTILITIES CONTROLLER
-$('#electricity').change(function(){
-  if(this.checked){
-    y1 = true;
-  }
-  if(!this.checked){
-    y1 = false;
-  }
-});
-
-$('#water').change(function(){
-  // console.log("water is clicked");
-  if(this.checked){
-    y2 = true;
-    // console.log("water is clicked 111");
-  }
-  if(!this.checked){
-    y2 = false;
-  }
-});
 
 
 //PUBLIC HEALTH
 //WHY Z1 IS NOT CLICKABLE???
 //A BIG BUGS HERE! SEEMS THAT ONLY THE EIGHTH AND NINTH BUTTON IS ONLY
 // CLICKABLE AFTER THE SHOWMAP BUTTON IS CLICKED...
-$('#hospital').change(function(){
-  console.log("hospital is clicked");
-  if(this.checked){
-    m1 = true;
-    console.log("hospital is clicked 111");
-  }
-  if(!this.checked){
-    m1 = false;
-  }
-});
-
-
-$('#clinic').change(function(){
-  if(this.checked){
-    m2 = true;
-  }
-  if(!this.checked){
-    m2 = false;
-  }
-});
-
-// SCHOOLS
-$('#primaryschool').change(function(){
-  if(this.checked){
-    w1 = true;
-  }
-  if(!this.checked){
-    w1 = false;
-  }
-});
-
-
-$('#middleschool').change(function(){
-  if(this.checked){
-    w2 = true;
-  }
-  if(!this.checked){
-    w2 = false;
-  }
-});
-
-
-$('#highschool').change(function(){
-  if(this.checked){
-    w3 = true;
-  }
-  if(!this.checked){
-    w3 = false;
-  }
-});
-
 // SHOW THE MAPS OR HIDE THEM
+
+// var parsedData_buildings;
+// var parsedData_railways;
+// var parsedData_roads;
+// var parsedData_greenspaces;
+// var parsedData_highhazards;
+// var parsedData_mediumhazards;
+// var parsedData_lowhazards;
+
+//DISPLAY THE DEFAULT INFO AND BOUNDARIES
+$(document).ready(function(){
+  $.ajax(adm).done(function(data) {
+    parsedData000 = JSON.parse(data);
+    console.log(parsedData000);
+    console.log("parsed000");
+    layerMappedPolygons = L.geoJson(parsedData000,
+      {
+        style: {opacity:0.4,width:0.5,color:'#E0903F'},
+        pointToLayer: function (feature, latlng) {
+          return new L.Polygon(latlng, {
+          });
+        },
+
+        onEachFeature: function(feature,layer){
+
+          layer.bindPopup(
+            "<b>Region Name: </b>" +
+            feature.properties.name_1 +
+            "</br>" +
+
+            "<b>Total Area: </b>" + "10,795 " + "sq km" +
+            "</br>" +
+
+            "<b>Total Population: </b>" + "570,000" +
+            "</br>" +
+
+            "</br>" +
+            "<b>Data Collected Year: </b>" + "2014"
+          )
+
+         }
+        }).addTo(map);
+        layerMappedPolygons.eachLayer(eachFeatureFunction);
+        // console.log(layerMappedPolygons[0].id_1);
+      })
+    });
+
+    //LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
+    $(document).ready(function(){
+      $.ajax(torinoboundary).done(function(data) {
+
+        parsedData_torinoboundary = JSON.parse(data);
+        console.log(parsedData_torinoboundary);
+        console.log("parsed torinoboundary");
+
+        var boundary = L.geoJson(parsedData_torinoboundary,
+          {
+            style: {opacity:0.4,width:0.5,color:'#2897E9'},
+            pointToLayer: function (feature, latlng) {
+              return new L.Polygon(latlng, {
+              });
+            },
+            }).addTo(map);
+          });
+        });
+
+
+// DISPLAY THE SELECTED INFO
 $('#showmap').click(function(){
-  console.log(x1,x2,x3,x4,x5,y1,y2,m1,m2,w1,w2,w3);
-  //LOAD NATIONAL BOUNDARIES
-//   if (y0 == true){
-//     GuatemalaB =
-//         L.geoJson(parsedData_Guatemala,
-//           {
-//             style: {opacity:0.2},
-//             pointToLayer: function (feature, latlngs) {
-//               return new L.Polygon(latlngs, {
-//               }
-//             );
-//           }}
-//         ).addTo(map).bindPopup("Guatemala");
-//
-//
-//     SalvadorB =
-//       L.geoJson(parsedData_Salvador,
-//         {
-//           style: {opacity:0.2},
-//           pointToLayer: function (feature, latlngs) {
-//             return new L.Polygon(latlngs, {
-//             }
-//           );
-//         }}
-//       ).addTo(map).bindPopup("El Salvador");
-//
-//
-//     HondurasB =
-//       L.geoJson(parsedData_Honduras,
-//         {
-//           style: {opacity:0.2},
-//           pointToLayer: function (feature, latlngs) {
-//             return new L.Polygon(latlngs, {
-//             }
-//           );
-//         }}
-//       ).addTo(map).bindPopup("Honduras");
-//
-//
-//     NationsB.push(GuatemalaB);
-//     NationsB.push(SalvadorB);
-//     NationsB.push(HondurasB);
-// }
+  console.log(b1,b2,b3,b4,c1);
+
+  if (b1 == true){
+    // $(document).ready(function(){
+      // $.ajax(adm).done(function(data) {
+        Buildings = L.geoJson(parsedData_buildings,
+          {
+            style: {opacity:0.4,width:0.5,color:'#E0941K'},
+            pointToLayer: function (feature, latlng) {
+              return new L.Polygon(latlng, {
+              });
+            },
+            }).addTo(map);
+            // layerMappedPolygons.eachLayer(eachFeatureFunction);
+            // // console.log(layerMappedPolygons[0].id_1);
+          // })
+        // });
+  }
+
+
+
+  if (b4 == true){
+    // $(document).ready(function(){
+      // $.ajax(adm).done(function(data) {
+        parsedData_greenspaces = L.geoJson(parsedData_greenspaces,
+          {
+            style: {opacity:0.4,width:0.5,color:'#EFF41K'},
+            pointToLayer: function (feature, latlng) {
+              return new L.Polygon(latlng, {
+              });
+            },
+            }).addTo(map);
+            // layerMappedPolygons.eachLayer(eachFeatureFunction);
+            // // console.log(layerMappedPolygons[0].id_1);
+          // })
+        // });
+  }
 
   //LOAD PRIMARY ROAD NETWORK
-    if (x1 == true){
-      _.each(parsedData_majorroads,function(item){
-        var itemB = L.geoJson(parsedData_majorroads,
+    if (b2 == true){
+      _.each(parsedData_railways,function(item){
+        var itemB = L.geoJson(parsedData_railways,
           {
             style: {opacity:0.6,width:1.2,color:'#DF722B'},
             pointToLayer: function (feature, latlngs) {
@@ -1391,17 +1346,17 @@ $('#showmap').click(function(){
               }
             );
           }}
-        ).addTo(map).bindPopup("road1");
-        PrimaryRoads.push(itemB);
+        ).addTo(map).bindPopup("railways");
+        Railways.push(itemB);
       }
       );
       // selectedmaps.push(PrimaryRoads);
     }
 
-    if (x2 == true){
+    if (b3 == true){
         //LOAD THE SECONDARY ROAD NETWORKS
-        _.each(parsedData_secondaryroads,function(item){
-          var itemB = L.geoJson(parsedData_secondaryroads,
+        _.each(parsedData_roads,function(item){
+          var itemB = L.geoJson(parsedData_roads,
             {
               style: {opacity:0.35,width:0.3,color:'#F7A920'},
               pointToLayer: function (feature, latlngs) {
@@ -1409,107 +1364,13 @@ $('#showmap').click(function(){
                 }
               );
             }}
-          ).addTo(map).bindPopup("road2");
-          SecondaryRoads.push(itemB);
+          ).addTo(map).bindPopup("roads");
+          Roads.push(itemB);
         }
         );
         // selectedmaps.push(SecondaryRoads);
     }
 
-
-
-    if (x3 == true){
-        //LOAD THE TERTIARY ROAD NETWORKS
-        _.each(parsedData_tertiaryroads,function(item){
-          var itemB = L.geoJson(parsedData_tertiaryroads,
-            {
-              style: {opacity:0.35,width:0.3,color:'#F7A920'},
-              pointToLayer: function (feature, latlngs) {
-                return new L.polyline(latlngs, {
-                }
-              );
-            }}
-          ).addTo(map).bindPopup("road2");
-          SecondaryRoads.push(itemB);
-        }
-        );
-        selectedmaps.push(TertiaryRoads);
-    }
-
-
-    if (x4 == true){
-        //LOAD THE URBAN ROAD NETWORKS
-        _.each(parsedData_urbanroads,function(item){
-          var itemB = L.geoJson(parsedData_urbanroads,
-            {
-              style: {opacity:0.35,width:0.3,color:'#1544D5'},
-              pointToLayer: function (feature, latlngs) {
-                return new L.polyline(latlngs, {
-                }
-              );
-            }}
-          ).addTo(map).bindPopup("road2");
-          UrbanRoads.push(itemB);
-        }
-        );
-        selectedmaps.push(UrbanRoads);
-    }
-
-
-    if (x5 == true){
-        //LOAD THE RURAL ROAD NETWORKS
-        _.each(parsedData_ruralroads,function(item){
-          var itemB = L.geoJson(parsedData_ruralroads,
-            {
-              style: {opacity:0.35,width:0.3,color:'#30CCC7'},
-              pointToLayer: function (feature, latlngs) {
-                return new L.polyline(latlngs, {
-                }
-              );
-            }}
-          ).addTo(map).bindPopup("road2");
-          RuralRoads.push(itemB);
-        }
-        );
-        selectedmaps.push(RuralRoads);
-    }
-
-//UTILITIES
-if (y1 == true){
-    //LOAD THE ELECTRICITY NETWORKS
-    _.each(parsedData_electricity,function(item){
-      var itemB = L.geoJson(parsedData_electricity,
-        {
-          style: {opacity:0.35,width:0.3,color:'#F7A920'},
-          pointToLayer: function (feature, latlngs) {
-            return new L.polyline(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("road2");
-      Electricity.push(itemB);
-    }
-    );
-    selectedmaps.push(Electricity);
-}
-
-if (y2 == true){
-    //LOAD THE ELECTRICITY NETWORKS
-    _.each(parsedData_water,function(item){
-      var itemB = L.geoJson(parsedData_water,
-        {
-          style: {opacity:0.35,width:0.3,color:'#F7A920'},
-          pointToLayer: function (feature, latlngs) {
-            return new L.polyline(latlngs, {
-            }
-          );
-        }}
-      ).addTo(map).bindPopup("road2");
-      Water.push(itemB);
-    }
-    );
-    selectedmaps.push(Water);
-}
 
     // if (x3 == true){
     //   //LOAD THE TERTIARY DATA
@@ -1534,201 +1395,100 @@ if (y2 == true){
     //       selectedmaps.push(Hospitals);
     //   }
 
-    if (m1 === true){
-      //LOAD THE HOSPITALS DATA
-         _.each(parsedData_Hospital,function(item){
-            var itemB = L.geoJson(parsedData_Hospital,
-              {
-                pointToLayer: function (feature, latlngs) {
-                  return new L.circleMarker(latlngs, {
-                     radius:3,
-                     fillColor:'#4330EA',
-                     color:'#2365D8',
-                     weight:1,
-                     opacity:0.3,
-                     fillOpacity:0.3,
-                    });
-                  }
-              }).addTo(map).bindPopup("Hospitals");
-              Hospitals.push(itemB);
-
-            }
-          );
-          selectedmaps.push(Hospitals);
-      }
-
-      // LOAD CLINICS DATA
-      if (m2 === true){
-        //LOAD THE CLINICS DATA
-           _.each(parsedData_Clinic,function(item){
-              var itemB = L.geoJson(parsedData_Clinic,
-                {
-                  pointToLayer: function (feature, latlngs) {
-                    return new L.circleMarker(latlngs, {
-                       radius:3,
-                       fillColor:'#41E0EA',
-                       color:'#2365D8',
-                       weight:1,
-                       opacity:0.3,
-                       fillOpacity:0.3,
-                      });
-                    }
-                }).addTo(map).bindPopup("Clinics");
-                Clinics.push(itemB);
-
-              }
-            );
-            selectedmaps.push(Clinics);
-        }
 
 //LOAD SCHOOL DATA IN DIFFERENT KINDS
-      if (w1 == true){
-        //LOAD THE SCHOOL DATA
-        // YOU CAN'T USE INCLUDES BECAUSE BASICA AND PRE-BASICA ALL INCLUDE BASICA!!!
-        var myFilter1 = function(feature) {
-            if (
-              feature.properties.school_typ == "Pre-Básica" ||
-              feature.properties.school_typ == "Pre-Básica,Básica,Media"
-            )
-            {
-              return true;
-            }
-            else {
-              return false;
-            }
-          };
-
-        _.each(parsedData_Schools,function(item){
-            var itemB = L.geoJson(parsedData_Schools,
-             {
-               style: {opacity:0.3,width:0.5,color:'#E5EF13'},
-               filter: myFilter1,
-               pointToLayer: function (feature, latlngs) {
-                 return new L.circleMarker(latlngs, {
-                    radius:2,
-                    fillColor:'#E5EF13',
-                    color:'#EBA430',
-                    weight:1,
-                    opacity:0.3,
-                    fillOpacity:0.3,
-                   });
-                 }
-             }).addTo(map).bindPopup("PrimarySchools");
-             PrimarySchools.push(itemB);
-
-           }
-         );
-         selectedmaps.push(PrimarySchools);
-      }
-
-      if (w2 == true){
-        //LOAD THE SCHOOL DATA
-        var myFilter2 = function(feature) {
-            if (
-              feature.properties.school_typ == "Básica" ||
-              feature.properties.school_typ == "Pre-Básica,Básica,Media"
-            )
-            {
-              return true;
-            }
-            else {
-              return false;
-            }
-          };
-
-        _.each(parsedData_Schools,function(item){
-           var itemB = L.geoJson(parsedData_Schools,
-             {
-               style: {opacity:0.3,width:0.5,color:'#E00F12'},
-               filter: myFilter2,
-               pointToLayer: function (feature, latlngs) {
-                 return new L.circleMarker(latlngs, {
-                    radius:2,
-                    fillColor:'#E00F12',
-                    color:'#EBA430',
-                    weight:1,
-                    opacity:0.3,
-                    fillOpacity:0.3,
-                   });
-                 }
-             }).addTo(map).bindPopup("MiddleSchools");
-             MiddleSchools.push(itemB);
-
-           }
-         );
-         selectedmaps.push(MiddleSchools);
-      }
-
-      if (w3 == true){
-        var myFilter3 = function(feature) {
-            if (
-              feature.properties.school_typ == "Media" ||
-              feature.properties.school_typ == "Pre-Básica,Básica,Media"
-            )
-            {
-              return true;
-            }
-            else {
-              return false;
-            }
-          };
-
-        //LOAD THE SCHOOL DATA
-        _.each(parsedData_Schools,function(item){
-           var itemB = L.geoJson(parsedData_Schools,
-             {
-               style: {opacity:0.3,width:0.5,color:'#E5E001'},
-               filter: myFilter3,
-               pointToLayer: function (feature, latlngs) {
-                 return new L.circleMarker(latlngs, {
-                    radius:2,
-                    fillColor:'#E5E001',
-                    color:'#EBA430',
-                    weight:1,
-                    opacity:0.3,
-                    fillOpacity:0.3,
-                   });
-                 }
-             }).addTo(map).bindPopup("HighSchools");
-             HighSchools.push(itemB);
-
-           }
-         );
-         selectedmaps.push(HighSchools);
-      }
-
-      // if (w4 == true){
-      //   var myFilter4 = function(feature) {
-      //       if (feature.properties.school_typ == "Pre-Básica,Básica,Media") {
-      //       return true;
+      // if (w1 == true){
+      //   //LOAD THE SCHOOL DATA
+      //   // YOU CAN'T USE INCLUDES BECAUSE BASICA AND PRE-BASICA ALL INCLUDE BASICA!!!
+      //   var myFilter1 = function(feature) {
+      //       if (
+      //         feature.properties.school_typ == "Pre-Básica" ||
+      //         feature.properties.school_typ == "Pre-Básica,Básica,Media"
+      //       )
+      //       {
+      //         return true;
       //       }
       //       else {
       //         return false;
       //       }
       //     };
       //
-      //   //LOAD THE SCHOOL DATA
       //   _.each(parsedData_Schools,function(item){
-      //      var itemB = L.geoJson(parsedData_Schools,
+      //       var itemB = L.geoJson(parsedData_Schools,
       //        {
-      //          style: {opacity:0.3,width:0.5,color:'#E5EF00'},
-      //          filter: myFilter4,
+      //          style: {opacity:0.3,width:0.5,color:'#E5EF13'},
+      //          filter: myFilter1,
       //          pointToLayer: function (feature, latlngs) {
       //            return new L.circleMarker(latlngs, {
-      //               radius:4,
-      //               fillColor:'#E5EF00',
+      //               radius:2,
+      //               fillColor:'#E5EF13',
       //               color:'#EBA430',
       //               weight:1,
       //               opacity:0.3,
       //               fillOpacity:0.3,
       //              });
       //            }
-      //        }).addTo(map).bindPopup("Schools");
-      //        Schools.push(itemB);
+      //        }).addTo(map).bindPopup("PrimarySchools");
+      //        PrimarySchools.push(itemB);
+      //
       //      }
       //    );
-      //    selectedmaps.push(Schools);
+      //    selectedmaps.push(PrimarySchools);
       // }
+
+      // if (w2 == true){
+      //   //LOAD THE SCHOOL DATA
+      //   var myFilter2 = function(feature) {
+      //       if (
+      //         feature.properties.school_typ == "Básica" ||
+      //         feature.properties.school_typ == "Pre-Básica,Básica,Media"
+      //       )
+      //       {
+      //         return true;
+      //       }
+      //       else {
+      //         return false;
+      //       }
+      //     };
+      //
+      //   _.each(parsedData_Schools,function(item){
+      //      var itemB = L.geoJson(parsedData_Schools,
+      //        {
+      //          style: {opacity:0.3,width:0.5,color:'#E00F12'},
+      //          filter: myFilter2,
+      //          pointToLayer: function (feature, latlngs) {
+      //            return new L.circleMarker(latlngs, {
+      //               radius:2,
+      //               fillColor:'#E00F12',
+      //               color:'#EBA430',
+      //               weight:1,
+      //               opacity:0.3,
+      //               fillOpacity:0.3,
+      //              });
+      //            }
+      //        }).addTo(map).bindPopup("MiddleSchools");
+      //        MiddleSchools.push(itemB);
+      //
+      //      }
+      //    );
+      //    selectedmaps.push(MiddleSchools);
+      // }
+
+      // if (w3 == true){
+      //   var myFilter3 = function(feature) {
+      //       if (
+      //         feature.properties.school_typ == "Media" ||
+      //         feature.properties.school_typ == "Pre-Básica,Básica,Media"
+      //       )
+      //       {
+      //         return true;
+      //       }
+      //       else {
+      //         return false;
+      //       }
+      //     };
+      //   }
+
 });
 
 
@@ -1737,46 +1497,13 @@ $('#hidemap').click(function(){
   console.log("ready to remove");
   console.log(selectedmaps);
 
-  _.each(PrimaryRoads,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(SecondaryRoads,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(TertiaryRoads,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(UrbanRoads,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(RuralRoads,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(Hospitals,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(Clinics,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(PrimarySchools,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(MiddleSchools,function(layer){
-    map.removeLayer(layer);
-  });
-
-  _.each(HighSchools,function(layer){
-    map.removeLayer(layer);
-  });
-
+  // _.each(PrimaryRoads,function(layer){
+  //   map.removeLayer(layer);
+  // });
+  //
+  // _.each(PrimarySchools,function(layer){
+  //   map.removeLayer(layer);
+  // });
 
   map.removeLayer(layerMappedPolygons);
   console.log("removed");
@@ -1785,97 +1512,72 @@ $('#hidemap').click(function(){
 });
 
 
-//4.2 LOADING ROAD NETWORK DATA
+//4.2 PARSING SPECIFIC DATA
 $(document).ready(function(){
-  $.ajax(tertiaryroads).done(function(data) {
-    parsedData_tertiaryroads = JSON.parse(data);
-    console.log(parsedData_tertiaryroads);
-    console.log("parsed_tertiaryroads");
-    console.log(parsedData_tertiaryroads.features[0].geometry.coordinates[0][0]);
+  $.ajax(buildings).done(function(data) {
+    parsedData_buildings = JSON.parse(data);
+    console.log(parsedData_buildings);
+    console.log("parsed buildings");
+    // console.log(parsedData_secondaryroads.features[0].geometry.coordinates[0][0]);
   });
 });
 
-
 $(document).ready(function(){
-  $.ajax(secondaryroads).done(function(data) {
-    parsedData_secondaryroads = JSON.parse(data);
-    console.log(parsedData_secondaryroads);
-    console.log("parsed15");
-    console.log(parsedData_secondaryroads.features[0].geometry.coordinates[0][0]);
+  $.ajax(railways).done(function(data) {
+    parsedData_railways = JSON.parse(data);
+    console.log(parsedData_railways);
+    console.log("parsed railways");
+    // console.log(parsedData_secondaryroads.features[0].geometry.coordinates[0][0]);
   });
 });
 
-//4.3 LOADING THE MAJOR ROAD NETWORK DATA
-  $(document).ready(function(){
-    $.ajax(majorroads).done(function(data) {
-      parsedData_majorroads = JSON.parse(data);
-      console.log(parsedData_majorroads);
-      console.log("parsed14");
-      console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
-    });
-  });
-
-
-//URBAN ROADS
-  $(document).ready(function(){
-    $.ajax(urbanroads).done(function(data) {
-      parsedData_urbanroads = JSON.parse(data);
-      console.log(parsedData_urbanroads);
-      console.log("parsed14");
-      console.log(parsedData_urbanroads.features[0].geometry.coordinates[0][0]);
-    });
-  });
-
-//RURAL ROADS
-  $(document).ready(function(){
-    $.ajax(ruralroads).done(function(data) {
-      parsedData_ruralroads = JSON.parse(data);
-      console.log(parsedData_ruralroads);
-      console.log("parsed14");
-      console.log(parsedData_ruralroads.features[0].geometry.coordinates[0][0]);
-    });
-  });
-
-
-//PARSING THE UTILITIES DATA
-
-//PARSING THE PUBLIC HEALTH DATA
-//PARSING THE HOSPITALS
-  $(document).ready(function(){
-    $.ajax(hospital).done(function(data) {
-      parsedData_Hospital = JSON.parse(data);
-      console.log(parsedData_Hospital);
-      console.log("parsedData_Hospital");
-    });
-  });
-
-  $(document).ready(function(){
-    $.ajax(clinic).done(function(data) {
-      parsedData_Clinic = JSON.parse(data);
-      console.log(parsedData_Clinic);
-      console.log("parsedData_Clinic");
-    });
-  });
-// //PARSING THE CLINICS
-//   $(document).ready(function(){
-//     $.ajax(majorroads).done(function(data) {
-//       parsedData_majorroads = JSON.parse(data);
-//       console.log(parsedData_majorroads);
-//       console.log("parsed14");
-//       console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
-//     });
-//   });
-
-
-//PARSING THE EDUCATION DATA
-//PARSING THE SCHOOLS
 $(document).ready(function(){
-  $.ajax(school).done(function(data) {
-    parsedData_Schools = JSON.parse(data);
-    console.log(parsedData_Schools);
-    console.log("parsed_Schools");
+  $.ajax(roads).done(function(data) {
+    parsedData_roads = JSON.parse(data);
+    console.log(parsedData_roads);
+    console.log("parsed roads");
+    // console.log(parsedData_secondaryroads.features[0].geometry.coordinates[0][0]);
   });
 });
+
+$(document).ready(function(){
+  $.ajax(greenspaces).done(function(data) {
+    parsedData_greenspaces = JSON.parse(data);
+    console.log(parsedData_greenspaces);
+    console.log("parsed greenspaces");
+    // console.log(parsedData_secondaryroads.features[0].geometry.coordinates[0][0]);
+  });
+});
+
+//4.3 LOADING THE HAZARDS DATA
+  $(document).ready(function(){
+    $.ajax(hazards_h).done(function(data) {
+      parsedData_highhazards = JSON.parse(data);
+      console.log(parsedData_highhazards);
+      console.log("parsed highhazards");
+      // console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+    });
+  });
+
+  $(document).ready(function(){
+    $.ajax(hazards_m).done(function(data) {
+      parsedData_mediumhazards = JSON.parse(data);
+      console.log(parsedData_mediumhazards);
+      console.log("parsed mediumhazards");
+      // console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+    });
+  });
+
+
+  $(document).ready(function(){
+    $.ajax(hazards_l).done(function(data) {
+      parsedData_lowhazards = JSON.parse(data);
+      console.log(parsedData_lowhazards);
+      console.log("parsed lowhazards");
+      // console.log(parsedData_majorroads.features[0].geometry.coordinates[0][0]);
+    });
+  });
+
 
 
 //4.3 EXPORT TABLE
