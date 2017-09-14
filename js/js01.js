@@ -1391,13 +1391,9 @@ $('#showmap').click(function(){
 
     // }
 
-
-
-
-
-
     //LOAD PRIMARY ROAD NETWORK
     if (b4 == true){
+      $('#box5').show();
       // $(document).ready(function(){
         // $.ajax(adm).done(function(data) {
           Greenspaces = L.geoJson(parsedData_greenspaces,
@@ -1416,6 +1412,7 @@ $('#showmap').click(function(){
 
 
     if (b2 == true){
+      $('#box3').show();
         _.each(parsedData_railways,function(item){
           var itemB = L.geoJson(parsedData_railways,
             {
@@ -1432,6 +1429,7 @@ $('#showmap').click(function(){
       }
 
       if (b3 == true){
+        $('#box4').show();
           _.each(parsedData_roads,function(item){
             var itemB = L.geoJson(parsedData_roads,
               {
@@ -1457,7 +1455,7 @@ $('#showmap').click(function(){
 //THE SEQUENCE IN CODE DOESN'T MATTER HERE
 
   if (b1 == true){
-    $('#fill2').show();
+    $('#box2').show();
       var imagebldgUrl = 'Torino_bldg_only_300dpi_PS2.png',
       imagebldgBounds = [[45.142949,7.820598], [44.98445,7.514261]];
 
