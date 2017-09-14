@@ -181,6 +181,43 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
         z-index: 70;
       }
 
+.ramptitle {
+  position:absolute;
+  bottom:35.5%;
+  right:6%;
+  z-index:70;
+}
+
+.title {
+  position:relative;
+  display:inline-block;
+  color:white;
+  font-family: Arial, sans-serif;
+  font-weight: lighter;
+}
+
+.coloramp {
+        position:absolute;
+        bottom:33%;
+        right:5.4%;
+        width:19%;
+        height:1.85%;
+        background: red; /* For browsers that do not support gradients */
+        background: -webkit-linear-gradient(left, green,yellow,red); /* For Safari 5.1 to 6.0 */
+        background: -o-linear-gradient(right, green,yellow,red); /* For Opera 11.1 to 12.0 */
+        background: -moz-linear-gradient(right, green,yellow,red); /* For Firefox 3.6 to 15 */
+        background:linear-gradient(to right, green,yellow,red);
+        font-family: Arial, sans-serif;
+        font-weight: lighter;
+        color:white;
+        /*background-color: rgba(171, 150, 150, .4);*/
+        /*padding: 15px;*/
+        margin: 10px;
+        border: 1px solid #f07f30;
+        z-index: 70;
+}
+
+
 .search {
   margin:auto;
 }
@@ -1455,8 +1492,8 @@ li{
 #fill1{
   position:relative;
   right:5px;
-  background-color:#EFC4AF;
-  /*fillopacity:0;*/
+  /*background-color:#FA2712;*/
+  border-color: #FA2712;
   height:10px;
   width:20px;
 }
@@ -1464,7 +1501,7 @@ li{
 #fill2{
   position:relative;
   right:5px;
-  background-color:#F71C0E;
+  background-color:#000000;
   height:10px;
   width:20px;
 }
@@ -1472,7 +1509,7 @@ li{
 #fill3{
   position:relative;
   right:5px;
-  background-color:#E3C715;
+  background-color:#DF722B;
   height:10px;
   width:20px;
 }
@@ -1480,7 +1517,7 @@ li{
 #fill4{
   position:relative;
   right:5px;
-  background-color:#81EC23;
+  background-color:#190D75;
   height:10px;
   width:20px;
 }
@@ -1488,10 +1525,11 @@ li{
 #fill5{
   position:relative;
   right:5px;
-  background-color:#F33105;
+  background-color:#08732C;
   height:10px;
   width:20px;
 }
+
 
 #graphtitle1{
   position:absolute;

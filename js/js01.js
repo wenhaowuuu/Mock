@@ -68,8 +68,8 @@
 //1.1 SETUP BASEMAP
 //SOME NOTES HERE
 var map = L.map('map', {
-  center: [45.069799, 7.682122],
-  zoom: 12.2
+  center: [45.023830, 7.636160],
+  zoom: 13.5
 });
 
 // var Style = 'dark';
@@ -172,21 +172,25 @@ imageBounds = [[45.142949,7.820598], [44.98445,7.514261]];
 //   east: 7.839621,
 //   west: 7.515590
 // };
-
 L.imageOverlay(imageUrl, imageBounds).addTo(map);
 
 
 //LOAD THE ZOOM-IN IMAGE
 var imagezoomUrl = 'Torino_base_0913.png',
 imagezoomBounds = [[45.029872,7.647414], [45.017178,7.622817]];
-// var imageBounds = {
-//   north: 45.161777,
-//   south: 44.972073,
-//   east: 7.839621,
-//   west: 7.515590
+// L.imageOverlay(imagezoomUrl, imagezoomBounds).addTo(map);
+
+
+//LOAD THE BLDG LAYER
+// var imagebldgUrl = 'Torino_bldg_only_300dpi_PS.png',
+// imagebldgBounds = [[45.142949,7.820598], [44.98445,7.514261]];
+//
+// L.imageOverlay(imagebldgUrl, imagebldgBounds).addTo(map);
+
+// if (b1 == true){
+//   L.imageOverlay(imagebldgUrl, imagebldgBounds).addTo(map);
 // };
 
-L.imageOverlay(imagezoomUrl, imagezoomBounds).addTo(map);
 
 
 // var schoolicon = L.icon({
@@ -1253,42 +1257,44 @@ $('#uhihazards').change(function(){
 // var parsedData_lowhazards;
 
 //DISPLAY THE DEFAULT INFO AND BOUNDARIES
-$(document).ready(function(){
-  $.ajax(adm).done(function(data) {
-    parsedData000 = JSON.parse(data);
-    console.log(parsedData000);
-    console.log("parsed000");
-    layerMappedPolygons = L.geoJson(parsedData000,
-      {
-        style: {opacity:0.4,width:0.5,color:'#E0903F'},
-        pointToLayer: function (feature, latlng) {
-          return new L.Polygon(latlng, {
-          });
-        },
+//FOLLOWING SHOWS THE ITALIAN REGIONAL ADMINISTRATIVE BOUNDARIES
 
-        onEachFeature: function(feature,layer){
-
-          layer.bindPopup(
-            "<b>Region Name: </b>" +
-            feature.properties.name_1 +
-            "</br>" +
-
-            "<b>Total Area: </b>" + "10,795 " + "sq km" +
-            "</br>" +
-
-            "<b>Total Population: </b>" + "570,000" +
-            "</br>" +
-
-            "</br>" +
-            "<b>Data Collected Year: </b>" + "2014"
-          )
-
-         }
-        }).addTo(map);
-        layerMappedPolygons.eachLayer(eachFeatureFunction);
-        // console.log(layerMappedPolygons[0].id_1);
-      })
-    });
+// $(document).ready(function(){
+//   $.ajax(adm).done(function(data) {
+//     parsedData000 = JSON.parse(data);
+//     console.log(parsedData000);
+//     console.log("parsed000");
+//     layerMappedPolygons = L.geoJson(parsedData000,
+//       {
+//         style: {opacity:0.4,width:0.5,color:'#E0903F'},
+//         pointToLayer: function (feature, latlng) {
+//           return new L.Polygon(latlng, {
+//           });
+//         },
+//
+//         onEachFeature: function(feature,layer){
+//
+//           layer.bindPopup(
+//             "<b>Region Name: </b>" +
+//             feature.properties.name_1 +
+//             "</br>" +
+//
+//             "<b>Total Area: </b>" + "10,795 " + "sq km" +
+//             "</br>" +
+//
+//             "<b>Total Population: </b>" + "570,000" +
+//             "</br>" +
+//
+//             "</br>" +
+//             "<b>Data Collected Year: </b>" + "2014"
+//           )
+//
+//          }
+//         }).addTo(map);
+//         layerMappedPolygons.eachLayer(eachFeatureFunction);
+//         // console.log(layerMappedPolygons[0].id_1);
+//       })
+//     });
 
 
 //LOAD THE ITALIAN ADMINISTRATIVE BOUNDARIES
@@ -1391,7 +1397,25 @@ $('#showmap').click(function(){
 
 
     //LOAD PRIMARY ROAD NETWORK
-      if (b2 == true){
+    if (b4 == true){
+      // $(document).ready(function(){
+        // $.ajax(adm).done(function(data) {
+          Greenspaces = L.geoJson(parsedData_greenspaces,
+            {
+              style: {opacity:0.4,width:0.5,color:'#08732C', fillColor: '#08732C', fillOpacity: 0.85},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+              // layerMappedPolygons.eachLayer(eachFeatureFunction);
+              // // console.log(layerMappedPolygons[0].id_1);
+            // })
+          // });
+    }
+
+
+    if (b2 == true){
         _.each(parsedData_railways,function(item){
           var itemB = L.geoJson(parsedData_railways,
             {
@@ -1405,11 +1429,9 @@ $('#showmap').click(function(){
           Railways.push(itemB);
         }
         );
-        // selectedmaps.push(PrimaryRoads);
       }
 
       if (b3 == true){
-          //LOAD THE SECONDARY ROAD NETWORKS
           _.each(parsedData_roads,function(item){
             var itemB = L.geoJson(parsedData_roads,
               {
@@ -1427,41 +1449,28 @@ $('#showmap').click(function(){
       }
 
 
-      if (b4 == true){
-        // $(document).ready(function(){
-          // $.ajax(adm).done(function(data) {
-            Greenspaces = L.geoJson(parsedData_greenspaces,
-              {
-                style: {opacity:0.4,width:0.5,color:'#08732C', fillColor: '#08732C', fillOpacity: 0.85},
-                pointToLayer: function (feature, latlng) {
-                  return new L.Polygon(latlng, {
-                  });
-                },
-                }).addTo(map);
-                // layerMappedPolygons.eachLayer(eachFeatureFunction);
-                // // console.log(layerMappedPolygons[0].id_1);
-              // })
-            // });
-      }
 
 
 
 
-    if (b1 == true){
-      // $(document).ready(function(){
-        // $.ajax(adm).done(function(data) {
+//TRYING TO FIGURE OUT HOW IMAGE CAN BE OVERLAYED ON TOP OF MAP-ADD ON OBJECTS!!
+//THE SEQUENCE IN CODE DOESN'T MATTER HERE
+
+  if (b1 == true){
+    $('#fill2').show();
+      var imagebldgUrl = 'Torino_bldg_only_300dpi_PS2.png',
+      imagebldgBounds = [[45.142949,7.820598], [44.98445,7.514261]];
+
+      // L.imageOverlay(imagebldgUrl, imagebldgBounds).addTo(map);
+
           Buildings = L.geoJson(parsedData_buildings,
             {
-              style: {opacity:0.3,width:0.03, fillColor: '#06065B', fillOpacity: 0.7, color:'#06065B'},
+              style: {opacity:0.3,width:0.03, fillColor: '#000000', fillOpacity: 0.7, color:'#06065B'},
               pointToLayer: function (feature, latlng) {
                 return new L.Polygon(latlng, {
                 });
               },
               }).addTo(map);
-              // layerMappedPolygons.eachLayer(eachFeatureFunction);
-              // // console.log(layerMappedPolygons[0].id_1);
-            // })
-          // });
     }
 
 
