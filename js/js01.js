@@ -1902,8 +1902,8 @@ var tableToPDF = function(){
   doc.setFont("times");
   doc.setFontSize(18);
   doc.setFontType("bold");
-  doc.text(10, 18, 'Infrastructure Efficiency Profile of ');
-  doc.setTextColor(255,140,40);
+  doc.text(10, 18, 'Urban Heat Island Effect of');
+  doc.setTextColor(255,140,40);Effect
   doc.text(110, 18, ' ' + P_muni);
   // doc.text(20, 30, '     ');
 
