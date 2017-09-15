@@ -1319,7 +1319,7 @@ $('#uhihazards').change(function(){
 
 // DISPLAY THE SELECTED INFO
 $('#showmap').click(function(){
-  console.log(b1,b2,b3,b4,c1);
+  console.log(b1,b2,b3,b4);
 
 
 //comments to Barry
@@ -1360,36 +1360,7 @@ $('#showmap').click(function(){
 
 
 
-      //ZOOM-IN IMAGE OVERLAY
-              HighHazards = L.geoJson(parsedData_highhazards,
-                {
-                  style: {opacity:0.1,width:0.3,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.2},
-                  pointToLayer: function (feature, latlng) {
-                    return new L.Polygon(latlng, {
-                    });
-                  },
-                  }).addTo(map);
 
-
-              MediumHazards = L.geoJson(parsedData_mediumhazards,
-                {
-                  style: {opacity:0.1,width:0.3,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.2},
-                  pointToLayer: function (feature, latlng) {
-                    return new L.Polygon(latlng, {
-                    });
-                  },
-                  }).addTo(map);
-
-              LowHazards = L.geoJson(parsedData_lowhazards,
-                {
-                  style: {opacity:0.1,width:0.3,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.2},
-                  pointToLayer: function (feature, latlng) {
-                    return new L.Polygon(latlng, {
-                    });
-                  },
-                  }).addTo(map);
-
-    // }
 
     //LOAD PRIMARY ROAD NETWORK
     if (b4 == true){
@@ -1416,7 +1387,7 @@ $('#showmap').click(function(){
         _.each(parsedData_railways,function(item){
           var itemB = L.geoJson(parsedData_railways,
             {
-              style: {opacity:0.65,width:1.2,color:'#DF722B'},
+              style: {opacity:0.65,width:1.2,color:'#6C3483'},
               pointToLayer: function (feature, latlngs) {
                 return new L.polyline(latlngs, {
                 }
@@ -1433,7 +1404,7 @@ $('#showmap').click(function(){
           _.each(parsedData_roads,function(item){
             var itemB = L.geoJson(parsedData_roads,
               {
-                style: {opacity:0.65,width:0.2,color:'#190D75'},
+                style: {opacity:0.35,width:0.05,color:'#190D75'},
                 pointToLayer: function (feature, latlngs) {
                   return new L.polyline(latlngs, {
                   }
@@ -1470,6 +1441,17 @@ $('#showmap').click(function(){
               },
               }).addTo(map);
     }
+
+
+//LOAD THE BOUNDARY
+            var boundary = L.geoJson(parsedData_torinoboundary,
+              {
+               style: {opacity:0.7,width:1.2,color:'#FA2712', fillOpacity:0},
+                pointToLayer: function (feature, latlng) {
+                  return new L.Polygon(latlng, {
+                  });
+                },
+                }).addTo(map);
 
 
 
@@ -1589,6 +1571,52 @@ $('#showmap').click(function(){
       //       }
       //     };
       //   }
+
+});
+
+
+//LOAD THE URBAN HEAT ISLAND ANALYSIS
+$('#analysis').click(function(){
+  console.log(c1);
+  //ZOOM-IN IMAGE OVERLAY LOAD HAZARDS DATA
+          HighHazards = L.geoJson(parsedData_highhazards,
+            {
+              style: {opacity:0.1,width:0.3,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.2},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+
+          MediumHazards = L.geoJson(parsedData_mediumhazards,
+            {
+              style: {opacity:0.1,width:0.3,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.2},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+          LowHazards = L.geoJson(parsedData_lowhazards,
+            {
+              style: {opacity:0.1,width:0.3,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.2},
+              pointToLayer: function (feature, latlng) {
+                return new L.Polygon(latlng, {
+                });
+              },
+              }).addTo(map);
+
+
+//LOAD THE BOUNDARY
+            var boundary = L.geoJson(parsedData_torinoboundary,
+              {
+                style: {opacity:0.7,width:1.2,color:'#FA2712', fillOpacity:0},
+                pointToLayer: function (feature, latlng) {
+                  return new L.Polygon(latlng, {
+                  });
+                },
+                }).addTo(map);
 
 });
 
@@ -1903,7 +1931,7 @@ var tableToPDF = function(){
   doc.setFontSize(18);
   doc.setFontType("bold");
   doc.text(10, 18, 'Urban Heat Island Effect of');
-  doc.setTextColor(255,140,40);Effect
+  doc.setTextColor(255,140,40);
   doc.text(110, 18, ' ' + P_muni);
   // doc.text(20, 30, '     ');
 
@@ -2018,13 +2046,19 @@ var tableToPDF = function(){
   //REFERENCE HERE
   //https://stackoverflow.com/questions/43664722/how-to-save-chart-js-charts-as-image-without-black-background-using-blobs-and-fi
   // layout A
-  var newCanvas1 = document.querySelector('#myChart1');
-  var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
-  doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
 
-  var newCanvas2 = document.querySelector('#myChart2');
-  var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
-  doc.addImage(newCanvasImg2,'JPEG', 120, 220, 60, 40);
+
+  // var newCanvas1 = document.querySelector('#myChart1');
+  // var newCanvasImg1 = newCanvas1.toDataURL("image/jpeg", 1.0);
+  // doc.addImage(newCanvasImg1,'JPEG', 120, 130, 80, 80);
+  //
+  // var newCanvas2 = document.querySelector('#myChart2');
+  // var newCanvasImg2 = newCanvas2.toDataURL("image/jpeg", 1.0);
+  // doc.addImage(newCanvasImg2,'JPEG', 120, 220, 60, 40);
+
+
+
+
 
   // var newCanvas0 = document.querySelector('#myImage1');
   // var newCanvasImg0 = newCanvas0.toDataURL("image/jpeg", 1.0);
@@ -2109,18 +2143,25 @@ var tableToPDF = function(){
   // https://stackoverflow.com/questions/19272933/jspdf-multi-page-pdf-with-html-renderrer
   // https://github.com/MrRio/jsPDF/issues/101
   // https://stackoverflow.com/questions/25904440/jspdf-addhtml-multiple-canvas-page
-  doc.addPage();
-  doc.setPage(2);
 
-  doc.setFontSize(10);
-  doc.setFontType("light");
-  doc.setFont("inherit");
-  doc.text(10, 5, 'DataXLat @ Geoadaptive LLC.');
-  doc.text(150, 5, '250 Summer St, Boston, MA, USA');
-  //DIVIDING LINE
-  doc.setLineWidth(1);
-  doc.setDrawColor(255,140,40);
-  doc.line(0, 8, 240, 8);
+
+
+
+  // doc.addPage();
+  // doc.setPage(2);
+  //
+  // doc.setFontSize(10);
+  // doc.setFontType("light");
+  // doc.setFont("inherit");
+  // doc.text(10, 5, 'DataXLat @ Geoadaptive LLC.');
+  // doc.text(150, 5, '250 Summer St, Boston, MA, USA');
+  // //DIVIDING LINE
+  // doc.setLineWidth(1);
+  // doc.setDrawColor(255,140,40);
+  // doc.line(0, 8, 240, 8);
+
+
+
 
 
   //TABLE HEADING STARTS HERE
@@ -2145,65 +2186,68 @@ var tableToPDF = function(){
   //
 
 
-  var columns = [
-           {title: "Subjects", dataKey: "sb"},
-           {title: "Indicators", dataKey: "id"},
-           {title: "Value", dataKey: "val"},
-         ];
-  var rows = [
-           {"sb": "TRANSPORTATION", "id": "Total Road Length (km)", "val": P_length.toFixed(3)},
-           {"sb": "", "id": "Road Density (km per sq km)", "val": P_density.toFixed(3)},
-           {"sb": "", "id": "Major Road (km)", "val": P_rd_1.toFixed(3)},
-           {"sb": "", "id": "Secondary Road (km)", "val": P_rd_2.toFixed(3)},
-           {"sb": "", "id": "Tertiary Road (km)", "val": P_rd_3.toFixed(3)},
-           {"sb": "", "id": "", "val": ""},
-           {"sb": "UTILITIES", "id": "Sanitation", "val": "67%"},
-           {"sb": "", "id": "Electricity", "val": "84%"},
-           {"sb": "", "id": "Water", "val": "90%"},
-           {"sb": "", "id": "Basic Needs Unsatisfied", "val": "28%"},
-           {"sb": "", "id": "", "val": ""},
-           {"sb": "EDUCATION", "id": "Literacy Rates", "val": "75%"},
-           {"sb": "", "id": "Number of Primary Schools", "val": "311"},
-           {"sb": "", "id": "Number of Middle Schools", "val": "69"},
-           {"sb": "", "id": "Number of High Schools", "val": "18"},
-           {"sb": "", "id": "Total Enrollment Number", "val": "12067"},
-           {"sb": "", "id": "", "val": ""},
-           {"sb": "PUBLC HEALTH", "id": "Number of Hospitals", "val": "3"},
-           {"sb": "", "id": "Number of Clinics", "val": "42"},
-           {"sb": "", "id": "Maximum Capacity of Medical Treatment", "val": "30021"},
 
-         ];
+
+  // var columns = [
+  //          {title: "Subjects", dataKey: "sb"},
+  //          {title: "Indicators", dataKey: "id"},
+  //          {title: "Value", dataKey: "val"},
+  //        ];
+  // var rows = [
+  //          {"sb": "TRANSPORTATION", "id": "Total Road Length (km)", "val": P_length.toFixed(3)},
+  //          {"sb": "", "id": "Road Density (km per sq km)", "val": P_density.toFixed(3)},
+  //          {"sb": "", "id": "Major Road (km)", "val": P_rd_1.toFixed(3)},
+  //          {"sb": "", "id": "Secondary Road (km)", "val": P_rd_2.toFixed(3)},
+  //          {"sb": "", "id": "Tertiary Road (km)", "val": P_rd_3.toFixed(3)},
+  //          {"sb": "", "id": "", "val": ""},
+  //          {"sb": "UTILITIES", "id": "Sanitation", "val": "67%"},
+  //          {"sb": "", "id": "Electricity", "val": "84%"},
+  //          {"sb": "", "id": "Water", "val": "90%"},
+  //          {"sb": "", "id": "Basic Needs Unsatisfied", "val": "28%"},
+  //          {"sb": "", "id": "", "val": ""},
+  //          {"sb": "EDUCATION", "id": "Literacy Rates", "val": "75%"},
+  //          {"sb": "", "id": "Number of Primary Schools", "val": "311"},
+  //          {"sb": "", "id": "Number of Middle Schools", "val": "69"},
+  //          {"sb": "", "id": "Number of High Schools", "val": "18"},
+  //          {"sb": "", "id": "Total Enrollment Number", "val": "12067"},
+  //          {"sb": "", "id": "", "val": ""},
+  //          {"sb": "PUBLC HEALTH", "id": "Number of Hospitals", "val": "3"},
+  //          {"sb": "", "id": "Number of Clinics", "val": "42"},
+  //          {"sb": "", "id": "Maximum Capacity of Medical Treatment", "val": "30021"},
+  //
+  //        ];
 
   // reference doc.addImage(div,'JPEG', 174, 40, 48, 32);
   // doc.autoTable(columns, rows);
 
 
-  doc.autoTable(columns, rows, {
-    // header: {textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold'},
-    headerStyles: {fillColor: [255, 140, 40]},
-    alternateRow: { fillColor: 211},
-    styles: {
-      // fillColor: [245, 245, 245]
-      // fillColor: [214, 225, 225]
-    },
-    // rowStyles: {
-    //   {fillColor: [255, 140, 40]}
-    //
-    // },
-
-    columnStyles: {
-      // sb: {fillColor: [214, 225, 225]},
-    	// id: {fillColor: [255,140,0],
-      },
-
-    margin: {left: 10, top: 20},
-    addPageContent: function(data) {
-      doc.setFontSize(14);
-      doc.setFontType("bold");
-      doc.setFont("georgia");
-    	doc.text("Table of Indicators", 10, 16);
-    }
-  });
+  //
+  // doc.autoTable(columns, rows, {
+  //   // header: {textColor: 255, fillColor: [41, 128, 185], fontStyle: 'bold'},
+  //   headerStyles: {fillColor: [255, 140, 40]},
+  //   alternateRow: { fillColor: 211},
+  //   styles: {
+  //     // fillColor: [245, 245, 245]
+  //     // fillColor: [214, 225, 225]
+  //   },
+  //   // rowStyles: {
+  //   //   {fillColor: [255, 140, 40]}
+  //   //
+  //   // },
+  //
+  //   columnStyles: {
+  //     // sb: {fillColor: [214, 225, 225]},
+  //   	// id: {fillColor: [255,140,0],
+  //     },
+  //
+  //   margin: {left: 10, top: 20},
+  //   addPageContent: function(data) {
+  //     doc.setFontSize(14);
+  //     doc.setFontType("bold");
+  //     doc.setFont("georgia");
+  //   	doc.text("Table of Indicators", 10, 16);
+  //   }
+  // });
 
 
   // generate table reference here
@@ -2281,7 +2325,7 @@ var tableToPDF = function(){
   doc.setFontType("italic");
   doc.setFontSize(10);
   doc.text(10, 260, '* This data was obtained from ');
-  doc.text(10, 265, '' + P_source);
+  // doc.text(10, 265, '' + P_source);
 
 
   //PAGE NUMBER

@@ -50,8 +50,8 @@
   margin:auto;
   /*width:204px;
   height:204px;*/
-  width:100%;
-  height:100%;
+  width:80%;
+  height:80%;
   align-items:center;
 }
 
@@ -215,7 +215,6 @@ div.description{
   padding:5px;
 }
 
-
 /*FOR THE FADE-OUT EFFECT 001*/
 .overlay {
     position:absolute;
@@ -301,8 +300,8 @@ div.description{
 
 .overlay-box1 {
   position:absolute;
-  left:340px;
-  top:290px;
+  left:20%;
+  top:32%;
   width:280px;
   height:120px;
   border-width: medium;
@@ -331,8 +330,8 @@ div.description{
 
 .overlay-box2 {
   position:absolute;
-  left:640px;
-  top:290px;
+  left:36%;
+  top:32%;
   width:280px;
   height:120px;
   border-width: medium;
@@ -361,8 +360,8 @@ div.description{
 
 .overlay-box3 {
   position:absolute;
-  left:940px;
-  top:290px;
+  left:52%;
+  top:32%;
   width:280px;
   height:120px;
   border-width: medium;
@@ -393,8 +392,8 @@ div.description{
 
 .overlay-box4 {
   position:absolute;
-  left:1240px;
-  top:290px;
+  left:68%;
+  top:32%;
   width:280px;
   height:120px;
   border-width: medium;
@@ -421,15 +420,24 @@ div.description{
   animation-delay: 1s;
 }
 
-
+#slogan{
+  position: absolute;
+  align-self: center;
+  top:17.8%;
+  left:36.6%;
+  /*font-style: italic;*/
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  font-size: 26px;
+  color:white;
+}
 
 .companyintro{
   position:absolute;
-  align-self: center;
-  bottom:30px;
-  right:250px;
-
-
+  align-self:center;
+  bottom:220px;
+  right:915px;
+  font-size:14px;
 }
 
 .companyintro a {
@@ -558,12 +566,12 @@ div.description{
 #fade-in1 {
   position: relative;
   margin: auto;
-  left: 35px;
-  top: 30px;
-  font-family:'Roboto Condensed',sans-serif;
+  left: 1.3%;
+  top: 1.4%;
+  color: #ffffff;
+  font-family: 'Roboto', sans-serif;
   /*font-weight: lighter;*/
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   z-index: 200;
   text-align: center;
   word-wrap: break-word;
@@ -590,12 +598,12 @@ div.description{
 #fade-in2 {
   position: relative;
   margin: auto;
-  left: 25px;
-  top: 30px;
-  font-family:'Roboto Condensed',sans-serif;
-  font-weight: bold;
-  /*font-weight: normal;*/
-  font-size: 18px;
+  left: 1.3%;
+  top: 1.4%;
+  color:white;
+  font-family:'Roboto',sans-serif;
+  /*font-weight: lighter;*/
+  font-size: 16px;
   z-index: 200;
   text-align: center;
   word-wrap: break-word;
@@ -623,12 +631,12 @@ div.description{
 #fade-in3 {
   position: relative;
   margin: auto;
-  left: 58px;
-  top: 30px;
-  font-family:'Roboto Condensed',sans-serif;
+  left: 13%;
+  top: 1.4%;
+  color:white;
+  font-family:'Roboto',sans-serif;
   /*font-weight: lighter;*/
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   z-index: 200;
   text-align: center;
   word-wrap: break-word;
@@ -656,12 +664,12 @@ div.description{
 #fade-in4 {
   position: relative;
   margin: auto;
-  left: 62px;
-  top: 30px;
-  font-family:'Roboto Condensed',sans-serif;
+  left: 15%;
+  top: 1.4%;
+  color:white;
+  font-family:'Roboto',sans-serif;
   /*font-weight: lighter;*/
-  font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   z-index: 200;
   text-align: center;
   word-wrap: break-word;

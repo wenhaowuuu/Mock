@@ -96,17 +96,21 @@ https://github.com/gka/pyshpgeocode -->
 
 <body>
 
-<div id='map0' style="position: absolute; right:0px; left: 380px; top:20px; height:68%; z-index:70;"></div>
+<div id='map0' style="position: absolute; right:0px; left:19.8%; top:20px; height:68%; z-index:70;"></div>
 <!--Left Panel-->
 <div class = "header">
+  <p class = "header_text">Welcome to Adap<span id = "red">Kit</span></p>
 </div>
-<div style="display: block; over-flow:auto; position: absolute; left: 4px; width: 380px; top: 18px; data-bottom="false" z-index:50;">
+
+<div style="display: block; over-flow:auto; position: absolute; left: 0.37%; width: 19.8%; top: 1.67%; data-bottom="false" z-index:50;">
     <h2 class = "main-heading">Urban Heat Island Analyst
       <br>
     </h2>
     <br>
     <br>
-    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">SCALE</label>
+    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">SCALE &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+    <label class="selectionlabel" for="dest" style="position:relative; left:10px;">CUSTOMER BOUNDARY</label>
+    <button id = "userdata">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp     upload here    &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp </button>
     <br>
     <div class="search" style="display:inline-block;position:relative;left:10px;">
       <div style="display:inline-block;">
@@ -118,17 +122,16 @@ https://github.com/gka/pyshpgeocode -->
             <option class = "option" id="neighborhood" value = "neighborhood">Neighborhood</option>
           </select>
         </div>
-        <br>
 
-        <label class="selectionlabel" for="dest">DATA UPLOAD</label>
+        <!-- <label class="selectionlabel" for="dest">DATA UPLOAD</label> -->
         <br>
-        <label class="selectionlabel" for="dest">Analysis Boundary</label>
+        <!-- <label class="selectionlabel" for="dest">Analysis Boundary</label> -->
         <br>
-        <label class="layerlabel" id = "upload">Province
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-          <button>upload</button>
+        <!-- <label class="layerlabel" id = "upload">Province
+          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp -->
+        <!-- <button>upload</button> -->
         </label>
-        <br>
+        <!-- <br>
         <label class="layerlabel">Municipality
           &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
           <button>upload</button>
@@ -139,27 +142,28 @@ https://github.com/gka/pyshpgeocode -->
           <button>upload</button>
         </label><br>
         <br>
-        <br>
-
-        <label class="selectionlabel" for="dest">Background Information</label>
+        <br> -->
+        <label class="selectionlabel" for="dest">Visualization</label>
         <br>
         <input id="buildings" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Building Footprints</label><br>
+        <label class="layerlabel">Building Footprints  &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+        <input id="industrial" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Industrial Land</label><br>
         <input id="railways" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Railways</label><br>
+        <label class="layerlabel">Railways &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
         <input id="roads" class="layers" type="checkbox" name="vehicle" value="Bike">
         <label class="layerlabel">Roads</label><br>
         <input id="greenspaces" class="layers" type="checkbox" name="vehicle" value="Bike">
-        <label class="layerlabel">Greenspace</label>
+        <label class="layerlabel">Greenspace &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</label>
+        <input id="roads" class="layers" type="checkbox" name="vehicle" value="Bike">
+        <label class="layerlabel">Waterbody</label>
+
         <br>
-        <br>
-        <br>
+
         <!-- //STILL NOT WORKING AS THE FIRST CHECKBOX ALWAYS WON'T ALLOW SELECTION -->
         <!-- <br> -->
         <!-- <input id="uhihazards" class="layers" type="checkbox" name="vehicle" value="SOMETHINGELSE">
         <label class="layerlabel">Urban Heat Island Hazards</label> -->
-
-
 
         <!-- <label class="selectionlabel" for="dest">Hazards</label><br>
         <input id="uhihazards" class="layers" type="checkbox" name="vehicle" value="Bike">
@@ -178,13 +182,18 @@ https://github.com/gka/pyshpgeocode -->
 
      </div>
      <div style="display:inline-block; position:relative; over-flow:auto; bottom: -5px; left:-6px; z-index:50;">
-       <button class="btn btn-default dropdown-toggle" type="button" id="showmap" data-toggle="dropdown" aria-haspopup="true">
-         Run the Analysis
+       <button id="showmap">
+         Display Selected
        </button>
-       <button class="btn btn-default dropdown-toggle" type="button" id="hidemap" data-toggle="dropdown" aria-haspopup="true">
+       &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+       <button id="hidemap">
          Clear Selection
        </button>
        <br>
+       <br>
+       <button class="btn btn-default dropdown-toggle" type="button" id="analysis" data-toggle="dropdown" aria-haspopup="true">
+         RUN THE ANALYSIS
+       </button>
      </div>
     </div>
 
@@ -231,7 +240,7 @@ https://github.com/gka/pyshpgeocode -->
     </div>
 </div>
 <!-- <div id="map" style="position: absolute; right:330px; left: 380px; top:20px; height:98%; z-index:10;"></div> -->
-<div id="map" style="position: absolute; right:0px; left: 380px; top:20px; height:68%; z-index:70;"></div>
+<div id="map" style="position: absolute; right:0; left:19.8%; top:2.8%; height:66%; z-index:70;"></div>
   <div class="hint">
     <p> Hint*: Click the boundaries to read statistics.</p>
   </div>
@@ -250,13 +259,48 @@ https://github.com/gka/pyshpgeocode -->
   </div>
 
   <div class="description">
-      <p id = "destext1">
-        <strong>Brief Description</strong>
-        <br><br>
-        This box area on the bottom-right is reserved for summary description of the graphs, charts and statistics. Some have begun to take steps to adapt to threats intensified by climate change, such as flooding, bushfires, heatwaves, and rising sea levels. Projects include: By installing protective and/ or resilient technologies and materials in properties that are prone to flooding.
-      </p>
+      <div class="hazards">
+        <div id = "destext1">
+          <strong>Hazards</strong>
+          <br><br>
+          <p>Urban Heat Island (UHI) effect is a phenomenon which occurs in dense urban areas, caused by the high proportion of impervious surfaces,  proximity of large buildings, and low vegetation density. Thermal satellite imagery is used to monitor elevated surface temperatures, in order to develop a UHI index and identify patterns across the urban landscape.</p>
+        </div>
+        <button class="btn btn-default dropdown-toggle" type="button" id="hreport" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+          Generate Report
+        </button>
+      </div>
 
-    <div class = "surveyarea">
+      <div class="impacts">
+        <div id = "destext2">
+          <strong>Exposures</strong>
+          <br><br>
+          <p>High temperatures represent a significant threat to city dwellers, particularly vulnerable populations such as the elderly, children, and people with existing medical conditions. Local census data enables the assessment of human exposure to urban heat island, by quantifying the number of vulnerable people within areas of high UHI index values.</p>
+        </div>
+        <button class="btn btn-default dropdown-toggle" type="button" id="ireport" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+          Generate Report
+        </button>
+      </div>
+
+      <div class="reporting">
+        <div id = "destext3">
+          <strong>Adaptation Strategies</strong>
+          <br><br>
+          <p>A range of policy and planning tools are available to help reduce the risk associated with hazard impacts. Adaptations to Urban Heat Island can include green measures such as increased vegetation cover, as well as soft approaches like developing a municipal adaptation plan.</p>
+        </div>
+        <br>
+        <br>
+        <button class="btn btn-default dropdown-toggle" type="button" id="rreport" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
+          Adaptation Report
+        </button>
+        <br>
+        <br>
+        <br>
+        <button class="btn btn-default dropdown-toggle" type="button" id="rdata" onclick="tableToEXCEL()" data-toggle="dropdown" aria-haspopup="true">
+          Data Download
+        </button>
+      </div>
+
+    <!-- <div class = "surveyarea">
       <p id = "destext2">
         <strong>Survey Section</strong>
         <br><br>
@@ -268,10 +312,11 @@ https://github.com/gka/pyshpgeocode -->
         3. How is the Urban Heat Island Effect impact you?
         </p>
       </ul>
-    </div>
-    <div class = "buttonarea">
+    </div> -->
+
+    <!-- <div class = "buttonarea">
       <p id = "destext4">
-        <strong>Download Section</strong>
+        <strong>Report Section</strong>
         <br><br>
       </p>
       <button class="btn btn-default dropdown-toggle" type="button" id="download1" onclick="tableToPDF()" data-toggle="dropdown" aria-haspopup="true">
@@ -281,7 +326,8 @@ https://github.com/gka/pyshpgeocode -->
         Adaptation Strategy
       </button>
       <br>
-    </div>
+    </div> -->
+
   </div>
 
   <canvas id = "canvas" src = "http://www.processamentodigital.com.br/wp-content/uploads/2017/06/arcgis_composicao_rgb_sentinel2.jpg"></canvas>
@@ -298,7 +344,7 @@ https://github.com/gka/pyshpgeocode -->
         <div class = "label1" id = "fill3" ></div><p class = label1> Railways </p>
       </div>
       <div style = "display:none" id = "box4">
-        <div class = "label1" id = "fill4" ></div><p class = label1> Roas </p>
+        <div class = "label1" id = "fill4" ></div><p class = label1> Roads </p>
       </div>
       <div style = "display:none" id = "box5">
         <div class = "label1" id = "fill5" ></div><p class = label1> Green Spaces</p>
