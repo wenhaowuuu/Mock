@@ -1116,37 +1116,60 @@ div.intro p {
 
 #logo{
   position:absolute;
-  right:4.5%;
+  right:17%;
   height:6%;
   top:1.5%;
   opacity:1;
 }
 
-#logoX{
+/*#logoX{
   position:relative;
   top:305px;
   right:30px;
   height:55px;
   opacity: 0.7;
+}*/
+
+#loginicon {
+  position:absolute;
+  top:1%;
+  left:87.5%;
+  height:22px;
+  width:22px;
+}
+
+
+.logined {
+  position:absolute;
+  top:1%;
+  left:89.5%;
+  font-family: 'Roboto', sans-serif;
+  font-weight:lighter;
+  /*font-style: italic;*/
+  font-size: 14px;
+}
+
+#account {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight:bold;
 }
 
 #login {
   position:absolute;
-  top:12.5%;
+  top:5.8%;
   left:87%;
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
-  font-size: 16px;
+  font-size: 12px;
 }
 
-#logined {
+#signup {
   position:absolute;
-  top:17.5%;
-  left:87.5%;
+  top:5.8%;
+  left:91%;
   font-family: 'Roboto', sans-serif;
-  font-weight:bold;
-  font-style: italic;
-  font-size: 16px;
+  font-weight: lighter;
+  font-size: 12px;
 }
 
 
