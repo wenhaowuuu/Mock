@@ -439,16 +439,16 @@ var P_rd_31 = ' ';
 var changeBasemap1 = function(location1){
   var value1 = location1.value;
   console.log(value1);
-  if(value1 == 'regional'){
-      map.setView([45.069799, 7.682122],5);
+  if(value1 == 'district'){
+      map.setView([45.023830, 7.636160],13.5);
+  }if(value1 == 'regional'){
+      map.setView([45.069799, 7.682122],6);
   }
   if(value1 == 'city'){
-      map.setView([45.069799, 7.682122],9);
-  }
-  if(value1 == 'district'){
-      map.setView([45.069799, 7.682122],11);
+      map.setView([45.069799, 7.682122],12);
   }
   if(value1 == 'neighborhood'){
+      L.imageOverlay(imagezoomUrl, imagezoomBounds).addTo(map);
       map.setView([45.021413, 7.634196],16.5);
   }
 };
@@ -1367,7 +1367,7 @@ $('#showmap').click(function(){
       $('#box5').show();
       // $(document).ready(function(){
         // $.ajax(adm).done(function(data) {
-          Greenspaces = L.geoJson(parsedData_greenspaces,
+          var itemB = L.geoJson(parsedData_greenspaces,
             {
               style: {opacity:0.4,width:0.5,color:'#08732C', fillColor: '#08732C', fillOpacity: 0.85},
               pointToLayer: function (feature, latlng) {
@@ -1379,6 +1379,7 @@ $('#showmap').click(function(){
               // // console.log(layerMappedPolygons[0].id_1);
             // })
           // });
+          Greenspaces.push(itemB);
     }
 
 
@@ -1432,7 +1433,7 @@ $('#showmap').click(function(){
 
       // L.imageOverlay(imagebldgUrl, imagebldgBounds).addTo(map);
 
-          Buildings = L.geoJson(parsedData_buildings,
+          var itemB = L.geoJson(parsedData_buildings,
             {
               style: {opacity:0.3,width:0.03, fillColor: '#000000', fillOpacity: 0.7, color:'#06065B'},
               pointToLayer: function (feature, latlng) {
@@ -1440,6 +1441,8 @@ $('#showmap').click(function(){
                 });
               },
               }).addTo(map);
+           Buildings.push(itemB);
+
     }
 
 
@@ -1626,13 +1629,21 @@ $('#hidemap').click(function(){
   console.log("ready to remove");
   console.log(selectedmaps);
 
-  // _.each(PrimaryRoads,function(layer){
-  //   map.removeLayer(layer);
-  // });
-  //
-  // _.each(PrimarySchools,function(layer){
-  //   map.removeLayer(layer);
-  // });
+  _.each(Greenspaces,function(layer){
+    map.removeLayer(layer);
+  });
+
+  _.each(Buildings,function(layer){
+    map.removeLayer(layer);
+  });
+
+  _.each(Railways,function(layer){
+    map.removeLayer(layer);
+  });
+
+  _.each(Roads,function(layer){
+    map.removeLayer(layer);
+  });
 
   map.removeLayer(layerMappedPolygons);
   console.log("removed");
@@ -2354,7 +2365,7 @@ var tableToPDF = function(){
 
 
 
-  doc.save('test.pdf');
+  doc.save('report.pdf');
   console.log("PDF ready");
 };
 
