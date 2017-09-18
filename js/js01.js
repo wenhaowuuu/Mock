@@ -1405,7 +1405,7 @@ $('#showmap').click(function(){
           _.each(parsedData_roads,function(item){
             var itemB = L.geoJson(parsedData_roads,
               {
-                style: {opacity:0.35,width:0.05,color:'#190D75'},
+                style: {opacity:0.45,width:0.05,color:'#190D75'},
                 pointToLayer: function (feature, latlngs) {
                   return new L.polyline(latlngs, {
                   }
@@ -1435,7 +1435,7 @@ $('#showmap').click(function(){
 
           var itemB = L.geoJson(parsedData_buildings,
             {
-              style: {opacity:0.3,width:0.03, fillColor: '#000000', fillOpacity: 0.7, color:'#06065B'},
+              style: {opacity:0.2,width:0.03, fillColor: '#000000', fillOpacity: 0.7, color:'#000000'},
               pointToLayer: function (feature, latlng) {
                 return new L.Polygon(latlng, {
                 });
@@ -1584,30 +1584,117 @@ $('#analysis').click(function(){
   //ZOOM-IN IMAGE OVERLAY LOAD HAZARDS DATA
           HighHazards = L.geoJson(parsedData_highhazards,
             {
-              style: {opacity:0.1,width:0.3,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.2},
+              style: {opacity:0.25,width:0.3,color:'#F71C0E', fillColor: '#F71C0E', fillOpacity: 0.2},
               pointToLayer: function (feature, latlng) {
                 return new L.Polygon(latlng, {
                 });
               },
+
+              // onEachFeature: function(feature,layer){
+              //
+              //           layer.bindPopup(
+              //             "<b>City Name: </b>" +
+              //             feature.properties.provincia +
+              //             "</br>" +
+              //
+              //             "<b>Total Area: </b>" +
+              //             feature.properties.area_m2.toFixed(5) + "sq meter" +
+              //             "</br>" +
+              //
+              //             "<b>Total Exposure Population: </b>" +
+              //             feature.properties.total_expo + " people" +
+              //             "</br>" +
+              //
+              //             "<b>Exposure Population under 5 years old: </b>" +
+              //             feature.properties.new_under5.toFixed(2) + " children" +
+              //             "</br>" +
+              //
+              //             "<b>Exposure Population over 65 years old: </b>" +
+              //             feature.properties.new_over65.toFixed(2) + " senior population" +
+              //             "</br>" +
+              //
+              //             "</br>" +
+              //             "<b>Data Collected Year: </b>" + "2014"
+              //           )
+                      //  }
               }).addTo(map);
 
 
           MediumHazards = L.geoJson(parsedData_mediumhazards,
             {
-              style: {opacity:0.1,width:0.3,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.2},
+              style: {opacity:0.25,width:0.3,color:'#E3C715', fillColor: '#E3C715', fillOpacity: 0.2},
               pointToLayer: function (feature, latlng) {
                 return new L.Polygon(latlng, {
                 });
               },
+
+              // onEachFeature: function(feature,layer){
+              //
+              //           layer.bindPopup(
+              //             "<b>City Name: </b>" +
+              //             feature.properties.provincia +
+              //             "</br>" +
+              //
+              //             "<b>Total Area: </b>" +
+              //             feature.properties.area_m2.toFixed(5) + "sq meter" +
+              //             "</br>" +
+              //
+              //             "<b>Total Exposure Population: </b>" +
+              //             feature.properties.total_expo + " people" +
+              //             "</br>" +
+              //
+              //             "<b>Average Exposure Population (< 5 years old): </b>" +
+              //             feature.properties.new_under5.toFixed(2) + " children" +
+              //             "</br>" +
+              //
+              //             "<b>Average Exposure Population (65+ years old): </b>" +
+              //             feature.properties.new_over65.toFixed(2) + " senior population" +
+              //             "</br>" +
+              //
+              //             "</br>" +
+              //             "<b>Data Collected Year: </b>" + "2014"
+              //
+              //           )
+              //          }
+
               }).addTo(map);
 
           LowHazards = L.geoJson(parsedData_lowhazards,
             {
-              style: {opacity:0.1,width:0.3,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.2},
+              style: {opacity:0.25,width:0.3,color:'#81EC23', fillColor: '#81EC23', fillOpacity: 0.2},
               pointToLayer: function (feature, latlng) {
                 return new L.Polygon(latlng, {
                 });
               },
+
+              // onEachFeature: function(feature,layer){
+              //
+              //           layer.bindPopup(
+              //             "<b>City Name: </b>" +
+              //             feature.properties.provincia +
+              //             "</br>" +
+              //
+              //             "<b>Total Area: </b>" +
+              //             feature.properties.area_m2.toFixed(5) + "sq meter" +
+              //             "</br>" +
+              //
+              //             "<b>Total Exposure Population: </b>" +
+              //             feature.properties.total_expo + " people" +
+              //             "</br>" +
+              //
+              //             "<b>Average Exposure Population (< 5 years old): </b>" +
+              //             feature.properties.new_under5.toFixed(2) + " children" +
+              //             "</br>" +
+              //
+              //             "<b>Average Exposure Population (65+ years old): </b>" +
+              //             feature.properties.new_over65.toFixed(2) + " senior population" +
+              //             "</br>" +
+              //
+              //             "</br>" +
+              //             "<b>Data Collected Year: </b>" + "2014"
+              //
+              //           )
+              //          }
               }).addTo(map);
 
 
