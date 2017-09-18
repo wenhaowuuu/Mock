@@ -1575,6 +1575,16 @@ li{
   z-index: 60;
 }
 
+#survey{
+  position:absolute;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bolder;
+  top:95%;
+  left:21%;
+  margin:10px;
+  z-index: 60;
+}
+
 #ARCGIS{
   position:absolute;
   right:330px;
