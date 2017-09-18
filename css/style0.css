@@ -116,6 +116,15 @@ src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-op
   left:10px;
 }
 
+#surveyintro{
+  padding:10px;
+  /*margin:5px;*/
+  font-family: 'Roboto', sans-serif;
+  font-weight: lighter;
+  font-size:14px;
+
+}
+
 .sidebar {
     position: absolute;
     left: 340px;
@@ -251,6 +260,19 @@ div.description{
   background-color: #85929E;
   filter:alpha(opacity=30);
   z-index: 30;
+
+}
+
+div.surveyquestions{
+  position:absolute;
+  top:2.8%;
+  bottom:0;
+  right:0;
+  width:75%;
+  background-color: #85929E;
+  filter:alpha(opacity=30);
+  z-index: 30;
+  /*margin-bottom:10px;*/
 
 }
 
@@ -1002,6 +1024,19 @@ div.description{
   height:200px;
   /*display:none;*/
 }
+
+
+.section{
+  position:relative;
+  width:95%;
+  padding:12px;
+  margin-left:15px;
+  border-style: solid;
+  border-radius: 4px;
+  border-color: white;
+  border-width: 2px;
+}
+
 
 .hazards{
   position:absolute;
