@@ -1715,10 +1715,10 @@ $('#analysis').click(function(){
 $('#hidemap').click(function(){
   console.log("ready to remove");
   console.log(selectedmaps);
-  $(#box2).hide();
-  $(#box3).hide();
-  $(#box4).hide();
-  $(#box5).hide();
+  $('#box2').hide();
+  $('#box3').hide();
+  $('#box4').hide();
+  $('#box5').hide();
 
   _.each(Greenspaces,function(layer){
     map.removeLayer(layer);
