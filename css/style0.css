@@ -1029,7 +1029,7 @@ div.surveyquestions{
 .section{
   position:relative;
   width:95%;
-  padding:12px;
+  padding:8px;
   margin-left:15px;
   border-style: solid;
   border-radius: 4px;
@@ -1113,6 +1113,15 @@ div.surveyquestions{
   left:12%;
   font-family:'Roboto Condensed',sans-serif;
   font-weight:lighter
+}
+
+#rreport_s{
+  position:absolute;
+  right:5%;
+  bottom:3%;
+  font-family:'Roboto Condensed',sans-serif;
+  font-weight:lighter
+  z-index:30;
 }
 
 #rdata{

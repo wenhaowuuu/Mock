@@ -2453,14 +2453,30 @@ var tableToPDF = function(){
   // doc.text(20, 140, '10 degrees rotated', null, 10);
   // doc.text(20, 160, '-10 degrees rotated', null, -10);
 
-
-
-
   doc.save('report.pdf');
   console.log("PDF ready");
 };
 
 
+var tableToPDF1 = function(){
+  var doc = new jsPDF("1", "", "letter");
+  var pageHeight = doc.internal.pageSize.height;
+  var pageWidth = doc.internal.pageSize.width;
+  console.log(pageHeight);
+  console.log(pageWidth);
+  doc.save('ReportUHI.pdf');
+  console.log("PDF ready");
+};
+
+var tableToPDF2 = function(){
+  var doc = new jsPDF("1", "", "letter");
+  var pageHeight = doc.internal.pageSize.height;
+  var pageWidth = doc.internal.pageSize.width;
+  console.log(pageHeight);
+  console.log(pageWidth);
+  doc.save('ReportExposure.pdf');
+  console.log("PDF ready");
+};
 
 //reference on complete new page loading
 // function makePDF() {
